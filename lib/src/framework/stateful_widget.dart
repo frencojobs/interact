@@ -5,15 +5,22 @@ abstract class StatefulWidget<T> {
   T interact() {
     final state = createState();
 
-    state._widget = this;
-    state.initState(state.context);
+    // Initialize the `widget` of the state
+    {
+      state._widget = this;
+      state.initState();
+    }
 
-    // First render
-    state.render(state.context);
-    state.context.renderCount++;
+    // Render for the first time and increase the renderCount
+    {
+      state.render(state.context);
+      state.context.renderCount++;
+    }
 
     final output = state.interact();
-    state.dispose(state.context);
+
+    // Finally reset the [Context], and clear stuffs
+    state.dispose();
 
     return output as T;
   }

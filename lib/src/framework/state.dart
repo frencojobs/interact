@@ -1,20 +1,33 @@
 part of clyde.framework;
 
+typedef VoidCallback = void Function();
+
 abstract class State<T extends StatefulWidget> {
-  final _context = Context();
+  Context _context;
   Context get context => _context;
 
   T get widget => _widget;
   T _widget;
 
-  void setState(void Function() fn) {
+  @protected
+  void setState(VoidCallback fn) {
     fn();
     render(context);
     _context.renderCount++;
   }
 
-  void initState(Context context);
+  @protected
+  @mustCallSuper
+  void initState() {
+    _context = Context();
+  }
+
   void render(Context context);
   dynamic interact();
-  void dispose(Context context);
+
+  @protected
+  @mustCallSuper
+  void dispose() {
+    context.reset();
+  }
 }

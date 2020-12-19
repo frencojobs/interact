@@ -5,16 +5,23 @@ import 'package:meta/meta.dart';
 // Project imports:
 import 'framework/framework.dart';
 import 'theme.dart';
+import 'utils/prompt.dart';
 
-class Select<T> extends StatefulWidget<int> {
-  final String name;
-  final List<T> options;
-  final SelectTheme theme = DefaultTheme.selectTheme;
+class Select extends StatefulWidget<int> {
+  final String prompt;
+  final List<String> options;
+  Theme theme = defaultTheme;
 
   Select({
-    @required this.name,
+    @required this.prompt,
     @required this.options,
-  }) : assert(options.isNotEmpty);
+  });
+
+  Select.withTheme({
+    @required this.prompt,
+    @required this.options,
+    @required this.theme,
+  });
 
   @override
   _SelectState createState() => _SelectState();
@@ -24,13 +31,37 @@ class _SelectState extends State<Select> {
   int index = 0;
 
   @override
-  void initState(Context context) {
-    context.console.writeLine(widget.name);
+  void initState() {
+    super.initState();
+
+    if (widget.options.isEmpty) {
+      throw Exception("Options can't be empty");
+    }
+
+    context.console.writeLine(promptInput(
+      theme: widget.theme,
+      message: widget.prompt,
+    ));
+
     context.console.hideCursor();
   }
 
   @override
-  void dispose(Context context) {
+  void dispose() {
+    super.dispose();
+
+    for (var i = 0; i < widget.options.length + 1; i++) {
+      context.console.cursorUp();
+      context.console.eraseLine();
+    }
+    context.console.cursorLeft();
+
+    context.console.writeLine(promptSuccess(
+      theme: widget.theme,
+      message: widget.prompt,
+      value: widget.options[index],
+    ));
+
     context.console.showCursor();
   }
 
@@ -46,9 +77,15 @@ class _SelectState extends State<Select> {
 
     for (var i = 0; i < widget.options.length; i++) {
       final option = widget.options[i];
-      final line =
-          '${i == index ? widget.theme.activeItemPrefix : widget.theme.inactiveItemPrefix} $option';
-      context.console.writeLine(line);
+      final line = StringBuffer();
+
+      if (i == index) {
+        line.write(widget.theme.selectTheme.activeItemPrefix);
+      } else {
+        line.write(widget.theme.selectTheme.inactiveItemPrefix);
+      }
+      line.write(' $option');
+      context.console.writeLine(line.toString());
     }
   }
 
