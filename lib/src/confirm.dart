@@ -7,7 +7,7 @@ import 'framework/framework.dart';
 import 'theme/theme.dart';
 import 'utils/prompt.dart';
 
-class Confirm extends Widget<bool> {
+class Confirm extends StatefulWidget<bool> {
   final String prompt;
   final bool defaultValue;
   final bool waitForNewLine;
@@ -70,13 +70,11 @@ class _ConfirmState extends State<Confirm> {
     line.write(promptInput(
       theme: widget.theme,
       message: widget.prompt,
-      hint: '(y/n)',
+      hint: 'y/n',
     ));
 
     if (answer != null) {
-      line.write(
-        ' ${widget.theme.promptTheme.defaultStyle(answer ? 'yes' : 'no')}',
-      );
+      line.write(widget.theme.promptTheme.defaultStyle(answer ? 'yes' : 'no'));
     }
     context.console.writeLine(line.toString());
   }

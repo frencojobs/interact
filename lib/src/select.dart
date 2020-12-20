@@ -7,7 +7,7 @@ import 'framework/framework.dart';
 import 'theme/theme.dart';
 import 'utils/prompt.dart';
 
-class Select extends Widget<int> {
+class Select extends StatefulWidget<int> {
   final String prompt;
   final int initialIndex;
   final List<String> options;
