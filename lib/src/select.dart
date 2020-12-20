@@ -7,20 +7,23 @@ import 'framework/framework.dart';
 import 'theme.dart';
 import 'utils/prompt.dart';
 
-class Select extends StatefulWidget<int> {
+class Select extends Widget<int> {
   final String prompt;
+  final int initialIndex;
   final List<String> options;
   Theme theme = defaultTheme;
 
   Select({
     @required this.prompt,
     @required this.options,
+    this.initialIndex = 0,
   });
 
   Select.withTheme({
     @required this.prompt,
     @required this.options,
     @required this.theme,
+    this.initialIndex = 0,
   });
 
   @override
@@ -31,11 +34,17 @@ class _SelectState extends State<Select> {
   int index = 0;
 
   @override
-  void initState() {
-    super.initState();
+  void init() {
+    super.init();
 
     if (widget.options.isEmpty) {
       throw Exception("Options can't be empty");
+    }
+
+    if (widget.options.length - 1 < widget.initialIndex) {
+      throw Exception("Default value is out of options' range");
+    } else {
+      index = widget.initialIndex;
     }
 
     context.console.writeLine(promptInput(
@@ -91,9 +100,9 @@ class _SelectState extends State<Select> {
 
   @override
   int interact() {
-    var key = context.console.readKey();
+    while (true) {
+      final key = context.readKey();
 
-    while (!_shouldStop(key)) {
       switch (key.controlChar) {
         case ControlCharacter.arrowUp:
           setState(() {
@@ -105,18 +114,12 @@ class _SelectState extends State<Select> {
             index = (index + 1) % widget.options.length;
           });
           break;
+        case ControlCharacter.enter:
+          return index;
+          break;
         default:
           break;
       }
-      key = context.console.readKey();
     }
-
-    return index;
-  }
-
-  bool _shouldStop(Key key) {
-    return key.isControl &&
-        (key.controlChar == ControlCharacter.ctrlC ||
-            key.controlChar == ControlCharacter.enter);
   }
 }

@@ -2,12 +2,21 @@ import 'dart:io' show stdout;
 import 'package:clyde/clyde.dart' show Select;
 
 void main() {
-  final options = ['Rust', 'Dart', 'TypeScript'];
+  final languages = ['Rust', 'Dart', 'TypeScript'];
+  final heroes = ['Iron Man', 'Captain America', 'My Dad'];
 
-  final choice = Select(
-    prompt: "What's your favorite language?",
-    options: options,
+  final x = Select(
+    prompt: "What's your favorite programming language?",
+    options: languages,
   ).interact();
 
-  stdout.writeln(options[choice]);
+  stdout.writeln('Omg, I like ${languages[x]} too.');
+
+  final _ = Select(
+    prompt: "What about superheroes?",
+    options: heroes,
+    initialIndex: 2,
+  ).interact();
+
+  stdout.writeln('Agreed!');
 }
