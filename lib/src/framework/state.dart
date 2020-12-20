@@ -2,7 +2,7 @@ part of clyde.framework;
 
 typedef VoidCallback = void Function();
 
-abstract class State<T extends StatefulWidget> {
+abstract class State<T extends Widget> {
   Context _context;
   Context get context => _context;
 
@@ -18,7 +18,7 @@ abstract class State<T extends StatefulWidget> {
 
   @protected
   @mustCallSuper
-  void initState() {
+  void init() {
     _context = Context();
   }
 

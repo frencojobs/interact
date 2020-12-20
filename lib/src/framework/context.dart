@@ -2,14 +2,29 @@ part of clyde.framework;
 
 final c = Console();
 
-/// Context for both [StatefulWidget] and [StatelessWidget].
+/// Top level key handler for reading keys
+/// such as `Ctrl+C` to exit from the process
+Key handleKey(Key key) {
+  if (key.isControl && key.controlChar == ControlCharacter.ctrlC) {
+    exit(0);
+  }
+
+  return key;
+}
+
+/// Context for [Widget]
 class Context {
   /// Console object to do stuffs on Terminal,
-  /// comes from `dart_console` library.
+  /// comes from `dart_console` library
   final Console console = c;
 
+  /// Method to read a single key from the input,
+  /// as replacement for `console.readKey` by
+  /// handling process level escape keys from parent
+  Key readKey() => handleKey(console.readKey());
+
   /// Number to keep track of the times the render method
-  /// has called from a context.
+  /// has called from a context
   int renderCount;
 
   /// Reset the context, set `renderCount` to `0`
