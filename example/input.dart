@@ -22,4 +22,10 @@ void main() {
     defaultValue: 'Earth',
   ).interact();
   stdout.writeln(planet);
+
+  final galaxy = Input(
+    prompt: "In what galaxy do you live?",
+    initialText: 'Andromeda',
+  ).interact();
+  stdout.writeln(galaxy);
 }

@@ -12,6 +12,7 @@ class ValidationError {
 
 class Input extends StatelessWidget<String> {
   final String prompt;
+  final String initialText;
   final String defaultValue;
   final bool Function(String) validator;
   Theme theme = Theme.defaultTheme;
@@ -19,6 +20,7 @@ class Input extends StatelessWidget<String> {
   Input({
     @required this.prompt,
     this.validator,
+    this.initialText = '',
     this.defaultValue,
   });
 
@@ -26,6 +28,7 @@ class Input extends StatelessWidget<String> {
     @required this.prompt,
     @required this.theme,
     this.validator,
+    this.initialText = '',
     this.defaultValue,
   });
 
@@ -41,20 +44,19 @@ class Input extends StatelessWidget<String> {
         hint: defaultValue,
       ));
 
-      final line = context.readLine();
+      final line = context.readLine(
+        initialText: initialText,
+      );
 
       if (hasError) {
-        context.console.cursorUp();
-        context.console.eraseLine();
+        context.erasePreviousLine();
       }
 
       if (validator != null) {
         try {
           validator(line);
         } on ValidationError catch (e) {
-          context.console.cursorUp();
-          context.console.eraseLine();
-          context.console.cursorLeft();
+          context.erasePreviousLine();
 
           context.console.writeLine(promptError(
             theme: theme,
@@ -65,9 +67,7 @@ class Input extends StatelessWidget<String> {
         }
       }
 
-      context.console.cursorUp();
-      context.console.eraseLine();
-      context.console.cursorLeft();
+      context.erasePreviousLine();
 
       final value =
           defaultValue != null ? (line.isEmpty ? defaultValue : line) : line;
