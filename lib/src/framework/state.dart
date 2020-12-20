@@ -2,7 +2,7 @@ part of clyde.framework;
 
 typedef VoidCallback = void Function();
 
-abstract class State<T extends Widget> {
+abstract class State<T extends StatefulWidget> {
   Context _context;
   Context get context => _context;
 

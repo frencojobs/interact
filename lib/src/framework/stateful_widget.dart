@@ -1,6 +1,6 @@
 part of clyde.framework;
 
-abstract class Widget<T> {
+abstract class StatefulWidget<T> {
   State createState();
   T interact() {
     final state = createState();
