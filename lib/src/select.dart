@@ -60,10 +60,8 @@ class _SelectState extends State<Select> {
     super.dispose();
 
     for (var i = 0; i < widget.options.length + 1; i++) {
-      context.console.cursorUp();
-      context.console.eraseLine();
+      context.erasePreviousLine();
     }
-    context.console.cursorLeft();
 
     context.console.writeLine(promptSuccess(
       theme: widget.theme,
@@ -78,10 +76,8 @@ class _SelectState extends State<Select> {
   void render(Context context) {
     if (context.renderCount > 0) {
       for (var i = 0; i < widget.options.length; i++) {
-        context.console.cursorUp();
-        context.console.eraseLine();
+        context.erasePreviousLine();
       }
-      context.console.cursorLeft();
     }
 
     for (var i = 0; i < widget.options.length; i++) {

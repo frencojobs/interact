@@ -44,9 +44,7 @@ class _ConfirmState extends State<Confirm> {
   void dispose() {
     super.dispose();
 
-    context.console.cursorUp();
-    context.console.eraseLine();
-    context.console.cursorLeft();
+    context.erasePreviousLine();
 
     context.console.writeLine(promptSuccess(
       theme: widget.theme,
@@ -60,9 +58,7 @@ class _ConfirmState extends State<Confirm> {
   @override
   void render(Context context) {
     if (context.renderCount > 0) {
-      context.console.cursorUp();
-      context.console.eraseLine();
-      context.console.cursorLeft();
+      context.erasePreviousLine();
     }
 
     final line = StringBuffer();
