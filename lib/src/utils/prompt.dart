@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:tint/tint.dart';
 
 // Project imports:
-import '../theme.dart';
+import '../theme/theme.dart';
 
 String promptInput({
   @required Theme theme,

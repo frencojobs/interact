@@ -4,14 +4,14 @@ import 'package:meta/meta.dart';
 
 // Project imports:
 import 'framework/framework.dart';
-import 'theme.dart';
+import 'theme/theme.dart';
 import 'utils/prompt.dart';
 
 class Select extends Widget<int> {
   final String prompt;
   final int initialIndex;
   final List<String> options;
-  Theme theme = defaultTheme;
+  Theme theme = Theme.defaultTheme;
 
   Select({
     @required this.prompt,

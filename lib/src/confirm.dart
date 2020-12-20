@@ -4,14 +4,14 @@ import 'package:meta/meta.dart';
 
 // Project imports:
 import 'framework/framework.dart';
-import 'theme.dart';
+import 'theme/theme.dart';
 import 'utils/prompt.dart';
 
 class Confirm extends Widget<bool> {
   final String prompt;
   final bool defaultValue;
   final bool waitForNewLine;
-  Theme theme = defaultTheme;
+  Theme theme = Theme.defaultTheme;
 
   Confirm({
     @required this.prompt,
