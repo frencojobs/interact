@@ -7,21 +7,22 @@ import 'framework/framework.dart';
 import 'theme/theme.dart';
 import 'utils/prompt.dart';
 
-class Confirm extends StatefulWidget<bool> {
+class Confirm extends Component<bool> {
+  final Theme theme;
   final String prompt;
+
   final bool defaultValue;
   final bool waitForNewLine;
-  Theme theme = Theme.defaultTheme;
 
   Confirm({
     @required this.prompt,
     this.defaultValue,
     this.waitForNewLine = false,
-  });
+  }) : theme = Theme.defaultTheme;
 
   Confirm.withTheme({
-    @required this.prompt,
     @required this.theme,
+    @required this.prompt,
     this.defaultValue,
     this.waitForNewLine = false,
   });
@@ -35,44 +36,32 @@ class _ConfirmState extends State<Confirm> {
 
   @override
   void init() {
-    super.init();
     answer = widget.defaultValue;
-    context.console.hideCursor();
+    context.hideCursor();
   }
 
   @override
   void dispose() {
-    super.dispose();
-
-    context.erasePreviousLine();
-
-    context.console.writeLine(promptSuccess(
+    context.writeln(promptSuccess(
       theme: widget.theme,
       message: widget.prompt,
       value: answer ? 'yes' : 'no',
     ));
-
-    context.console.showCursor();
+    context.showCursor();
   }
 
   @override
-  void render(Context context) {
-    if (context.renderCount > 0) {
-      context.erasePreviousLine();
-    }
-
+  void render() {
     final line = StringBuffer();
-
     line.write(promptInput(
       theme: widget.theme,
       message: widget.prompt,
       hint: 'y/n',
     ));
-
     if (answer != null) {
       line.write(widget.theme.promptTheme.defaultStyle(answer ? 'yes' : 'no'));
     }
-    context.console.writeLine(line.toString());
+    context.writeln(line.toString());
   }
 
   @override

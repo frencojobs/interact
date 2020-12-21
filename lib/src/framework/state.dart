@@ -2,32 +2,28 @@ part of clyde.framework;
 
 typedef VoidCallback = void Function();
 
-abstract class State<T extends StatefulWidget> {
-  Context _context;
+/// Provides the structure and `setState` function.
+abstract class State<T extends Component> {
+  final _context = Context();
   Context get context => _context;
 
-  T get widget => _widget;
   T _widget;
+  T get widget => _widget;
 
+  /// Runs the [fn] function, erases all lines from the previous
+  /// render, and increases the render count after rendering a new state.
   @protected
   void setState(VoidCallback fn) {
     fn();
-    render(context);
-    _context.renderCount++;
+
+    context.erasePreviousLine(context.linesCount);
+    context.resetLinesCount();
+    render();
+    context.increaseRenderCount();
   }
 
-  @protected
-  @mustCallSuper
-  void init() {
-    _context = Context();
-  }
-
-  void render(Context context);
+  void init() {}
+  void dispose() {}
+  void render() {}
   dynamic interact();
-
-  @protected
-  @mustCallSuper
-  void dispose() {
-    context.reset();
-  }
 }

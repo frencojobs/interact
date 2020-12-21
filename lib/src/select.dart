@@ -7,7 +7,7 @@ import 'framework/framework.dart';
 import 'theme/theme.dart';
 import 'utils/prompt.dart';
 
-class Select extends StatefulWidget<int> {
+class Select extends Component<int> {
   final String prompt;
   final int initialIndex;
   final List<String> options;
@@ -35,8 +35,6 @@ class _SelectState extends State<Select> {
 
   @override
   void init() {
-    super.init();
-
     if (widget.options.isEmpty) {
       throw Exception("Options can't be empty");
     }
@@ -47,39 +45,25 @@ class _SelectState extends State<Select> {
       index = widget.initialIndex;
     }
 
-    context.console.writeLine(promptInput(
+    context.writeln(promptInput(
       theme: widget.theme,
       message: widget.prompt,
     ));
-
-    context.console.hideCursor();
+    context.hideCursor();
   }
 
   @override
   void dispose() {
-    super.dispose();
-
-    for (var i = 0; i < widget.options.length + 1; i++) {
-      context.erasePreviousLine();
-    }
-
-    context.console.writeLine(promptSuccess(
+    context.writeln(promptSuccess(
       theme: widget.theme,
       message: widget.prompt,
       value: widget.options[index],
     ));
-
-    context.console.showCursor();
+    context.showCursor();
   }
 
   @override
-  void render(Context context) {
-    if (context.renderCount > 0) {
-      for (var i = 0; i < widget.options.length; i++) {
-        context.erasePreviousLine();
-      }
-    }
-
+  void render() {
     for (var i = 0; i < widget.options.length; i++) {
       final option = widget.options[i];
       final line = StringBuffer();
@@ -90,7 +74,7 @@ class _SelectState extends State<Select> {
         line.write(widget.theme.selectTheme.inactiveItemPrefix);
       }
       line.write(' $option');
-      context.console.writeLine(line.toString());
+      context.writeln(line.toString());
     }
   }
 

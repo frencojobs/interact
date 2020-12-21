@@ -1,54 +1,75 @@
 part of clyde.framework;
 
-final c = Console();
+final _defaultConsole = Console();
 
-/// Top level key handler for reading keys
-/// such as `Ctrl+C` to exit from the process.
-Key handleKey(Key key) {
-  if (key.isControl && key.controlChar == ControlCharacter.ctrlC) {
-    exit(1);
-  }
-
-  return key;
-}
-
-/// Context for both [StatelessWidget] and [StatefulWidget]
+/// [Context] is used by [Component] and [State] to actually render
+/// things to the console, and to act as a state store during rendering,
+/// which will store things such as the number or renderings done and the
+/// amount of lines used by a specific render, so that the [State] can
+/// clear old lines and render new stuffs automatically.
 class Context {
-  /// Console object to do stuffs on Terminal,
-  /// comes from `dart_console` library
-  final Console console = c;
+  final _console = _defaultConsole;
 
-  void erasePreviousLine() {
-    console.cursorUp();
-    console.eraseLine();
+  int _renderCount = 0;
+  int get renderCount => _renderCount;
+  void increaseRenderCount() => _renderCount++;
+  void resetRenderCount() => _renderCount = 0;
+
+  int _linesCount = 0;
+  int get linesCount => _linesCount;
+  void increaseLinesCount() => _linesCount++;
+  void resetLinesCount() => _linesCount = 0;
+
+  /// Shows the cursor.
+  void showCursor() => _console.showCursor();
+
+  /// Hide the cursor.
+  void hideCursor() => _console.hideCursor();
+
+  /// Writes a string to the console.
+  void write(String text) => _console.write(text);
+
+  /// Increases the number of lines written for the current render,
+  /// and writes a line to the the console.
+  void writeln([String text, TextAlignment alignment]) {
+    increaseLinesCount();
+    _console.writeLine(text, alignment);
   }
 
-  /// Method to read a single key from the input,
-  /// as replacement for `console.readKey` by
-  /// handling process level escape keys from parent
-  Key readKey() => handleKey(console.readKey());
+  /// Erase one line above the current cursor by default.
+  ///
+  /// If the argument [n] is supplied, it will repeat the process
+  /// to [n] times.
+  void erasePreviousLine([int n = 1]) {
+    for (var i = 0; i < n; i++) {
+      _console.cursorUp();
+      _console.eraseLine();
+    }
+  }
 
-  /// This method is taken from `dart_console` library and added
-  /// custom functionalities for custom use cases
+  /// Reads a key press, same as dart_console library's
+  /// `readKey()` function but this function handles the `Ctrl+C` key
+  /// press to immediately exit from the process.
+  Key readKey() => _handleKey(_console.readKey());
+
+  /// Reads a line, same as dart_console library's `readLine()` function,
+  /// and it's partially taken from the source code of it and modified
+  /// for custom use cases, such as accepting initial text as an argument,
+  /// and allowing to disable rendering the key press, to use in the [Password]
+  /// component.
   String readLine({
-    @required String initialText,
+    String initialText = '',
     bool noRender = false,
-    Function(String text, Key lastPressed) callback,
   }) {
     var buffer = initialText;
     var index = buffer.length;
 
-    final screenRow = console.cursorPosition.row;
-    final screenColOffset = console.cursorPosition.col;
+    final screenRow = _console.cursorPosition.row;
+    final screenColOffset = _console.cursorPosition.col;
+    final bufferMaxLength = _console.windowWidth - screenColOffset - 3;
 
-    final bufferMaxLength = console.windowWidth - screenColOffset - 3;
-
-    // Render once first if buffer is not empty
     if (buffer.isNotEmpty && !noRender) {
-      console.cursorPosition = Coordinate(screenRow, screenColOffset);
-      console.eraseCursorToEnd();
-      console.write(buffer); // allow for backspace condition
-      console.cursorPosition = Coordinate(screenRow, screenColOffset + index);
+      write(buffer);
     }
 
     while (true) {
@@ -57,7 +78,7 @@ class Context {
       if (key.isControl) {
         switch (key.controlChar) {
           case ControlCharacter.enter:
-            console.writeLine();
+            writeln();
             return buffer;
           case ControlCharacter.backspace:
           case ControlCharacter.ctrlH:
@@ -71,6 +92,10 @@ class Context {
             if (index < buffer.length - 1) {
               buffer = buffer.substring(0, index) + buffer.substring(index + 1);
             }
+            break;
+          case ControlCharacter.ctrlU:
+            buffer = '';
+            index = 0;
             break;
           case ControlCharacter.ctrlK:
             buffer = buffer.substring(0, index);
@@ -115,24 +140,19 @@ class Context {
       }
 
       if (!noRender) {
-        console.cursorPosition = Coordinate(screenRow, screenColOffset);
-        console.eraseCursorToEnd();
-        console.write(buffer); // allow for backspace condition
-        console.cursorPosition = Coordinate(screenRow, screenColOffset + index);
+        _console.cursorPosition = Coordinate(screenRow, screenColOffset);
+        _console.eraseCursorToEnd();
+        write(buffer);
+        _console.cursorPosition =
+            Coordinate(screenRow, screenColOffset + index);
       }
-
-      if (callback != null) callback(buffer, key);
     }
   }
 
-  /// Number to keep track of the times the render method
-  /// has called from a context
-  int renderCount;
-
-  /// Reset the context, set `renderCount` to `0`
-  void reset() {
-    renderCount = 0;
+  Key _handleKey(Key key) {
+    if (key.isControl && key.controlChar == ControlCharacter.ctrlC) {
+      exit(1);
+    }
+    return key;
   }
-
-  Context({this.renderCount = 0});
 }

@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:meta/meta.dart';
 
 // Project imports:
@@ -10,19 +11,19 @@ class ValidationError {
   ValidationError(this.message);
 }
 
-class Input extends StatelessWidget<String> {
+class Input extends Component<String> {
   final String prompt;
   final String initialText;
   final String defaultValue;
   final bool Function(String) validator;
-  Theme theme = Theme.defaultTheme;
+  final Theme theme;
 
   Input({
     @required this.prompt,
     this.validator,
     this.initialText = '',
     this.defaultValue,
-  });
+  }) : theme = Theme.defaultTheme;
 
   Input.withTheme({
     @required this.prompt,
@@ -33,54 +34,65 @@ class Input extends StatelessWidget<String> {
   });
 
   @override
-  @protected
-  String render(Context context) {
-    bool hasError = false;
+  _InputState createState() => _InputState();
+}
 
-    while (true) {
-      context.console.write(promptInput(
-        theme: theme,
-        message: prompt,
-        hint: defaultValue,
+class _InputState extends State<Input> {
+  String value;
+  String error;
+
+  @override
+  void init() {
+    value = widget.initialText;
+  }
+
+  @override
+  void dispose() {
+    context.writeln(promptSuccess(
+      theme: widget.theme,
+      message: widget.prompt,
+      value: value,
+    ));
+  }
+
+  @override
+  void render() {
+    if (error != null) {
+      context.writeln(promptError(
+        theme: widget.theme,
+        message: error,
       ));
+    }
+  }
 
-      final line = context.readLine(
-        initialText: initialText,
-      );
+  @override
+  String interact() {
+    while (true) {
+      context.write(promptInput(
+        theme: widget.theme,
+        message: widget.prompt,
+        hint: widget.defaultValue,
+      ));
+      final line = context.readLine(initialText: widget.initialText);
 
-      if (hasError) {
-        context.erasePreviousLine();
-      }
-
-      if (validator != null) {
+      if (widget.validator != null) {
         try {
-          validator(line);
+          widget.validator(line);
         } on ValidationError catch (e) {
-          context.erasePreviousLine();
-
-          context.console.writeLine(promptError(
-            theme: theme,
-            message: e.message,
-          ));
-          hasError = true;
+          setState(() {
+            error = e.message;
+          });
           continue;
         }
       }
 
-      context.erasePreviousLine();
-
-      final value =
-          defaultValue != null ? (line.isEmpty ? defaultValue : line) : line;
-
-      hasError = false;
-
-      context.console.writeLine(
-        promptSuccess(
-          theme: theme,
-          message: prompt,
-          value: value,
-        ),
-      );
+      setState(() {
+        if (line.isEmpty && widget.defaultValue != null) {
+          value = widget.defaultValue;
+        } else {
+          value = line;
+        }
+      });
 
       return value;
     }

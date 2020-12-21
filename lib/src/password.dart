@@ -5,7 +5,7 @@ import 'framework/framework.dart';
 import 'theme/theme.dart';
 import 'utils/prompt.dart';
 
-class Password extends StatelessWidget<String> {
+class Password extends Component<String> {
   final String prompt;
   final bool confirmation;
   final String confirmPrompt;
@@ -28,62 +28,64 @@ class Password extends StatelessWidget<String> {
   });
 
   @override
-  @protected
-  String render(Context context) {
-    int errorCount = 0;
+  _PasswordState createState() => _PasswordState();
+}
 
+class _PasswordState extends State<Password> {
+  bool hasError;
+
+  @override
+  void init() {
+    hasError = false;
+  }
+
+  @override
+  void dispose() {
+    context.writeln(
+      promptSuccess(
+        theme: widget.theme,
+        message: widget.prompt,
+        value: '****',
+      ),
+    );
+  }
+
+  @override
+  void render() {
+    if (hasError) {
+      context.writeln(promptError(
+        theme: widget.theme,
+        message: widget.confirmError ?? 'Passwords do not match',
+      ));
+    }
+  }
+
+  @override
+  String interact() {
     while (true) {
-      context.console.write(promptInput(
-        theme: theme,
-        message: prompt,
+      hasError = false;
+      context.write(promptInput(
+        theme: widget.theme,
+        message: widget.prompt,
       ));
 
-      final password = context.readLine(
-        initialText: '',
-        noRender: true,
-      );
+      final password = context.readLine(noRender: true);
 
-      if (confirmation) {
-        context.console.write(promptInput(
-          theme: theme,
-          message: confirmPrompt ?? prompt,
+      if (widget.confirmation) {
+        context.write(promptInput(
+          theme: widget.theme,
+          message: widget.confirmPrompt ?? widget.prompt,
         ));
 
-        final repeated = context.readLine(
-          initialText: '',
-          noRender: true,
-        );
+        final repeated = context.readLine(noRender: true);
 
         if (password != repeated) {
-          context.console.writeLine(promptError(
-            theme: theme,
-            message: confirmError ?? 'Passwords do not match',
-          ));
-          errorCount++;
+          setState(() {
+            hasError = true;
+          });
           continue;
         }
       }
-
-      for (var i = 0; i <= errorCount; i++) {
-        if (i > 0) {
-          // For the error lines which is 1 less than input prompts
-          context.erasePreviousLine();
-        }
-
-        // For the input prompts
-        context.erasePreviousLine();
-        if (confirmation) {
-          context.erasePreviousLine();
-        }
-      }
-
-      context.console.writeLine(
-        promptSuccess(
-          theme: theme,
-          message: prompt,
-          value: '****',
-        ),
-      );
 
       return password;
     }
