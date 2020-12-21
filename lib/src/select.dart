@@ -70,10 +70,13 @@ class _SelectState extends State<Select> {
 
       if (i == index) {
         line.write(widget.theme.selectTheme.activeItemPrefix);
+        line.write(' ');
+        line.write(widget.theme.selectTheme.activeItemStyle(option));
       } else {
         line.write(widget.theme.selectTheme.inactiveItemPrefix);
+        line.write(' ');
+        line.write(widget.theme.selectTheme.inactiveItemStyle(option));
       }
-      line.write(' $option');
       context.writeln(line.toString());
     }
   }

@@ -22,6 +22,8 @@ class Theme {
     selectTheme: SelectTheme(
       activeItemPrefix: '❯'.green(),
       inactiveItemPrefix: ' ',
+      activeItemStyle: (x) => x.cyan(),
+      inactiveItemStyle: (x) => x,
     ),
     promptTheme: PromptTheme(
       inputPrefix: '?'.yellow(),
