@@ -1,5 +1,5 @@
 import 'dart:io' show stdout;
-import 'package:clyde/clyde.dart' show MultiSelect;
+import 'package:interact/interact.dart' show MultiSelect;
 
 void main() {
   final musicals = ['Hamilton', 'Dear Evan Hansen', 'Wicked'];

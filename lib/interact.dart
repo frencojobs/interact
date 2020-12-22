@@ -1,4 +1,4 @@
-library clyde;
+library interact;
 
 export 'src/confirm.dart';
 export 'src/input.dart';

@@ -1,6 +1,6 @@
 import 'dart:convert' show JsonEncoder;
 import 'dart:io' show stdout, stderr, exit;
-import 'package:clyde/clyde.dart';
+import 'package:interact/interact.dart';
 
 void main() {
   stdout.writeln(
@@ -11,7 +11,7 @@ void main() {
 
   final name = Input(
     prompt: 'package name',
-    defaultValue: 'clyde',
+    defaultValue: 'interact',
     validator: (x) {
       if (x.contains(RegExp(r'[^a-zA-Z\d]'))) {
         throw ValidationError('Contains an invalid character!');

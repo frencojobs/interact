@@ -1,7 +1,7 @@
-name: clyde
+name: interact
 description: A collection of interactive command-line components.
 version: 1.0.0
-repository: https://github.com/frencojobs/clyde
+repository: https://github.com/frencojobs/interact
 
 environment:
   sdk: ">=2.10.0 <3.0.0"
@@ -16,5 +16,9 @@ dev_dependencies:
   test: ^1.14.4
 
 scripts:
+  format: dartfmt -w .
   sort:
-    imports: pub run import_sorter:main
+    imports: pub run import_sorter:main *
+
+import_sorter:
+  comments: false

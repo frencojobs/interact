@@ -1,8 +1,6 @@
-// Package imports:
 import 'package:dart_console/dart_console.dart';
 import 'package:meta/meta.dart';
 
-// Project imports:
 import 'framework/framework.dart';
 import 'theme/theme.dart';
 import 'utils/prompt.dart';

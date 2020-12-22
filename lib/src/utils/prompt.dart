@@ -1,8 +1,6 @@
-// Package imports:
 import 'package:meta/meta.dart';
 import 'package:tint/tint.dart';
 
-// Project imports:
 import '../theme/theme.dart';
 
 String promptInput({

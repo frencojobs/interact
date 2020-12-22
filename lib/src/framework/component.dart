@@ -1,4 +1,4 @@
-part of clyde.framework;
+part of interact.framework;
 
 /// A [Component] is an abstraction made with purpose
 /// of writing clear/managed state and rendering for

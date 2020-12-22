@@ -1,5 +1,5 @@
 import 'dart:io' show stdout;
-import 'package:clyde/clyde.dart' show Confirm;
+import 'package:interact/interact.dart' show Confirm;
 
 void main() {
   final x = Confirm(prompt: "Does it work?").interact();

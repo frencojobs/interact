@@ -1,6 +1,3 @@
-library clyde.theme;
-
-// Package imports:
 import 'package:meta/meta.dart';
 import 'package:tint/tint.dart';
 

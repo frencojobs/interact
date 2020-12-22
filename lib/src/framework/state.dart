@@ -1,4 +1,4 @@
-part of clyde.framework;
+part of interact.framework;
 
 typedef VoidCallback = void Function();
 

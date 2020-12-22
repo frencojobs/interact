@@ -1,5 +1,5 @@
 import 'dart:io' show stdout;
-import 'package:clyde/clyde.dart' show Input, ValidationError;
+import 'package:interact/interact.dart' show Input, ValidationError;
 
 void main() {
   final name = Input(prompt: "What's your name?").interact();

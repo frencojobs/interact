@@ -1,7 +1,5 @@
-// Package imports:
 import 'package:meta/meta.dart';
 
-// Project imports:
 import 'framework/framework.dart';
 import 'theme/theme.dart';
 import 'utils/prompt.dart';
