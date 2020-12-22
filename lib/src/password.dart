@@ -44,7 +44,7 @@ class _PasswordState extends State<Password> {
       promptSuccess(
         theme: component.theme,
         message: component.prompt,
-        value: '****',
+        value: component.theme.hiddenPrefix,
       ),
     );
   }

@@ -85,6 +85,15 @@ class _MultiSelectState extends State<MultiSelect> {
       final option = component.options[i];
       final line = StringBuffer();
 
+      if (component.theme.showActiveCursor) {
+        if (i == index) {
+          line.write(component.theme.activeItemPrefix);
+        } else {
+          line.write(component.theme.inactiveItemPrefix);
+        }
+        line.write(' ');
+      }
+
       if (selection.contains(i)) {
         line.write(component.theme.checkedItemPrefix);
       } else {

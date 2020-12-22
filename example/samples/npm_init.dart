@@ -3,13 +3,16 @@ import 'dart:io' show stdout, stderr, exit;
 import 'package:interact/interact.dart';
 
 void main() {
+  final theme = Theme.basicTheme;
+
   stdout.writeln(
     'This utility will walk you through creating a package.json file.',
   );
   stdout.writeln();
   stdout.writeln('Press ^C at any time to quit.');
 
-  final name = Input(
+  final name = Input.withTheme(
+    theme: theme,
     prompt: 'package name',
     defaultValue: 'interact',
     validator: (x) {
@@ -20,7 +23,8 @@ void main() {
     },
   ).interact();
 
-  final version = Input(
+  final version = Input.withTheme(
+    theme: theme,
     prompt: 'version',
     defaultValue: '1.0.0',
     validator: (x) {
@@ -31,15 +35,34 @@ void main() {
     },
   ).interact();
 
-  final description = Input(prompt: 'description').interact();
-  final entry = Input(
+  final description = Input.withTheme(
+    theme: theme,
+    prompt: 'description',
+  ).interact();
+
+  final entry = Input.withTheme(
+    theme: theme,
     prompt: 'entry point',
     defaultValue: 'index.js',
   ).interact();
-  final testCommand = Input(prompt: 'test command').interact();
-  final repo = Input(prompt: 'git repository').interact();
-  final keywords = Input(prompt: 'keywords').interact();
-  final license = Input(
+
+  final testCommand = Input.withTheme(
+    theme: theme,
+    prompt: 'test command',
+  ).interact();
+
+  final repo = Input.withTheme(
+    theme: theme,
+    prompt: 'git repository',
+  ).interact();
+
+  final keywords = Input.withTheme(
+    theme: theme,
+    prompt: 'keywords',
+  ).interact();
+
+  final license = Input.withTheme(
+    theme: theme,
     prompt: 'license',
     defaultValue: 'ISC',
   ).interact();
@@ -68,7 +91,8 @@ void main() {
   stdout.writeln(JsonEncoder.withIndent(''.padLeft(4)).convert(content));
   stdout.writeln();
 
-  final ok = Confirm(
+  final ok = Confirm.withTheme(
+    theme: theme,
     prompt: 'Is this OK?',
     defaultValue: true,
     waitForNewLine: true,

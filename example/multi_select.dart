@@ -5,7 +5,7 @@ void main() {
   final musicals = ['Hamilton', 'Dear Evan Hansen', 'Wicked'];
 
   final x = MultiSelect(
-    prompt: "What's your favorite Musicals?",
+    prompt: "Let me know your favorite musicals",
     options: musicals,
     defaults: [false, true, false],
   ).interact();

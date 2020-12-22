@@ -8,17 +8,20 @@ import 'utils/prompt.dart';
 class Sort extends Component<List<String>> {
   final Theme theme;
   final String prompt;
+  final bool showOutput;
   final List<String> options;
 
   Sort({
     @required this.prompt,
     @required this.options,
+    this.showOutput = true,
   }) : theme = Theme.defaultTheme;
 
   Sort.withTheme({
     @required this.prompt,
     @required this.options,
     @required this.theme,
+    this.showOutput = true,
   });
 
   @override
@@ -51,7 +54,9 @@ class _SortState extends State<Sort> {
     context.writeln(promptSuccess(
       theme: component.theme,
       message: component.prompt,
-      value: '',
+      value: component.showOutput
+          ? options.map((i) => component.options[i]).join(', ')
+          : '',
     ));
     context.showCursor();
   }
@@ -61,6 +66,15 @@ class _SortState extends State<Sort> {
     for (var i = 0; i < options.length; i++) {
       final option = component.options[options[i]];
       final line = StringBuffer();
+
+      if (component.theme.showActiveCursor) {
+        if (i == index) {
+          line.write(component.theme.activeItemPrefix);
+        } else {
+          line.write(component.theme.inactiveItemPrefix);
+        }
+        line.write(' ');
+      }
 
       if (picked != null && picked == options[i]) {
         line.write(component.theme.pickedItemPrefix);

@@ -6,14 +6,14 @@ void main() {
   final heroes = ['Iron Man', 'Captain America', 'My Dad'];
 
   final x = Select(
-    prompt: "What's your favorite programming language?",
+    prompt: "Your favorite programming language",
     options: languages,
   ).interact();
 
   stdout.writeln('Omg, I like ${languages[x]} too.');
 
   final _ = Select(
-    prompt: "What about superheroes?",
+    prompt: "Favorite superhero",
     options: heroes,
     initialIndex: 2,
   ).interact();
