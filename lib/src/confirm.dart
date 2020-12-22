@@ -36,15 +36,15 @@ class _ConfirmState extends State<Confirm> {
 
   @override
   void init() {
-    answer = widget.defaultValue;
+    answer = component.defaultValue;
     context.hideCursor();
   }
 
   @override
   void dispose() {
     context.writeln(promptSuccess(
-      theme: widget.theme,
-      message: widget.prompt,
+      theme: component.theme,
+      message: component.prompt,
       value: answer ? 'yes' : 'no',
     ));
     context.showCursor();
@@ -54,12 +54,12 @@ class _ConfirmState extends State<Confirm> {
   void render() {
     final line = StringBuffer();
     line.write(promptInput(
-      theme: widget.theme,
-      message: widget.prompt,
+      theme: component.theme,
+      message: component.prompt,
       hint: 'y/n',
     ));
     if (answer != null) {
-      line.write(widget.theme.promptTheme.defaultStyle(answer ? 'yes' : 'no'));
+      line.write(component.theme.defaultStyle(answer ? 'yes' : 'no'));
     }
     context.writeln(line.toString());
   }
@@ -72,7 +72,7 @@ class _ConfirmState extends State<Confirm> {
       if (key.isControl) {
         if (key.controlChar == ControlCharacter.enter &&
             answer != null &&
-            widget.waitForNewLine) {
+            component.waitForNewLine) {
           return answer;
         }
       } else {
@@ -82,7 +82,7 @@ class _ConfirmState extends State<Confirm> {
             setState(() {
               answer = true;
             });
-            if (!widget.waitForNewLine) {
+            if (!component.waitForNewLine) {
               return answer;
             }
             break;
@@ -91,7 +91,7 @@ class _ConfirmState extends State<Confirm> {
             setState(() {
               answer = false;
             });
-            if (!widget.waitForNewLine) {
+            if (!component.waitForNewLine) {
               return answer;
             }
             break;

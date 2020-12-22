@@ -12,12 +12,12 @@ String promptInput({
 }) {
   final buffer = StringBuffer();
 
-  buffer.write(theme.promptTheme.inputPrefix);
+  buffer.write(theme.inputPrefix);
   buffer.write(' $message '.bold());
   if (hint != null) {
-    buffer.write('(${theme.promptTheme.hintStyle(hint)}) ');
+    buffer.write('(${theme.hintStyle(hint)}) ');
   }
-  buffer.write(theme.promptTheme.inputSuffix);
+  buffer.write(theme.inputSuffix);
   buffer.write(' ');
 
   return buffer.toString();
@@ -30,10 +30,10 @@ String promptSuccess({
 }) {
   final buffer = StringBuffer();
 
-  buffer.write(theme.promptTheme.successPrefix);
+  buffer.write(theme.successPrefix);
   buffer.write(' $message '.bold());
-  buffer.write(theme.promptTheme.successSuffix);
-  buffer.write(theme.promptTheme.valueStyle(' $value '));
+  buffer.write(theme.successSuffix);
+  buffer.write(theme.valueStyle(' $value '));
 
   return buffer.toString();
 }
@@ -44,8 +44,8 @@ String promptError({
 }) {
   final buffer = StringBuffer();
 
-  buffer.write(theme.promptTheme.errorPrefix);
-  buffer.write(' ${theme.promptTheme.errorStyle(message)} '.bold());
+  buffer.write(theme.errorPrefix);
+  buffer.write(' ${theme.errorStyle(message)} '.bold());
 
   return buffer.toString();
 }

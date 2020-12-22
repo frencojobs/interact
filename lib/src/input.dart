@@ -43,14 +43,14 @@ class _InputState extends State<Input> {
 
   @override
   void init() {
-    value = widget.initialText;
+    value = component.initialText;
   }
 
   @override
   void dispose() {
     context.writeln(promptSuccess(
-      theme: widget.theme,
-      message: widget.prompt,
+      theme: component.theme,
+      message: component.prompt,
       value: value,
     ));
   }
@@ -59,7 +59,7 @@ class _InputState extends State<Input> {
   void render() {
     if (error != null) {
       context.writeln(promptError(
-        theme: widget.theme,
+        theme: component.theme,
         message: error,
       ));
     }
@@ -69,15 +69,15 @@ class _InputState extends State<Input> {
   String interact() {
     while (true) {
       context.write(promptInput(
-        theme: widget.theme,
-        message: widget.prompt,
-        hint: widget.defaultValue,
+        theme: component.theme,
+        message: component.prompt,
+        hint: component.defaultValue,
       ));
-      final line = context.readLine(initialText: widget.initialText);
+      final line = context.readLine(initialText: component.initialText);
 
-      if (widget.validator != null) {
+      if (component.validator != null) {
         try {
-          widget.validator(line);
+          component.validator(line);
         } on ValidationError catch (e) {
           setState(() {
             error = e.message;
@@ -87,8 +87,8 @@ class _InputState extends State<Input> {
       }
 
       setState(() {
-        if (line.isEmpty && widget.defaultValue != null) {
-          value = widget.defaultValue;
+        if (line.isEmpty && component.defaultValue != null) {
+          value = component.defaultValue;
         } else {
           value = line;
         }

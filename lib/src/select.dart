@@ -35,19 +35,19 @@ class _SelectState extends State<Select> {
 
   @override
   void init() {
-    if (widget.options.isEmpty) {
+    if (component.options.isEmpty) {
       throw Exception("Options can't be empty");
     }
 
-    if (widget.options.length - 1 < widget.initialIndex) {
+    if (component.options.length - 1 < component.initialIndex) {
       throw Exception("Default value is out of options' range");
     } else {
-      index = widget.initialIndex;
+      index = component.initialIndex;
     }
 
     context.writeln(promptInput(
-      theme: widget.theme,
-      message: widget.prompt,
+      theme: component.theme,
+      message: component.prompt,
     ));
     context.hideCursor();
   }
@@ -55,27 +55,27 @@ class _SelectState extends State<Select> {
   @override
   void dispose() {
     context.writeln(promptSuccess(
-      theme: widget.theme,
-      message: widget.prompt,
-      value: widget.options[index],
+      theme: component.theme,
+      message: component.prompt,
+      value: component.options[index],
     ));
     context.showCursor();
   }
 
   @override
   void render() {
-    for (var i = 0; i < widget.options.length; i++) {
-      final option = widget.options[i];
+    for (var i = 0; i < component.options.length; i++) {
+      final option = component.options[i];
       final line = StringBuffer();
 
       if (i == index) {
-        line.write(widget.theme.selectTheme.activeItemPrefix);
+        line.write(component.theme.activeItemPrefix);
         line.write(' ');
-        line.write(widget.theme.selectTheme.activeItemStyle(option));
+        line.write(component.theme.activeItemStyle(option));
       } else {
-        line.write(widget.theme.selectTheme.inactiveItemPrefix);
+        line.write(component.theme.inactiveItemPrefix);
         line.write(' ');
-        line.write(widget.theme.selectTheme.inactiveItemStyle(option));
+        line.write(component.theme.inactiveItemStyle(option));
       }
       context.writeln(line.toString());
     }
@@ -89,12 +89,12 @@ class _SelectState extends State<Select> {
       switch (key.controlChar) {
         case ControlCharacter.arrowUp:
           setState(() {
-            index = (index - 1) % widget.options.length;
+            index = (index - 1) % component.options.length;
           });
           break;
         case ControlCharacter.arrowDown:
           setState(() {
-            index = (index + 1) % widget.options.length;
+            index = (index + 1) % component.options.length;
           });
           break;
         case ControlCharacter.enter:

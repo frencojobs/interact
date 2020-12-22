@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:meta/meta.dart';
 
 // Project imports:
@@ -43,8 +44,8 @@ class _PasswordState extends State<Password> {
   void dispose() {
     context.writeln(
       promptSuccess(
-        theme: widget.theme,
-        message: widget.prompt,
+        theme: component.theme,
+        message: component.prompt,
         value: '****',
       ),
     );
@@ -54,8 +55,8 @@ class _PasswordState extends State<Password> {
   void render() {
     if (hasError) {
       context.writeln(promptError(
-        theme: widget.theme,
-        message: widget.confirmError ?? 'Passwords do not match',
+        theme: component.theme,
+        message: component.confirmError ?? 'Passwords do not match',
       ));
     }
   }
@@ -65,16 +66,16 @@ class _PasswordState extends State<Password> {
     while (true) {
       hasError = false;
       context.write(promptInput(
-        theme: widget.theme,
-        message: widget.prompt,
+        theme: component.theme,
+        message: component.prompt,
       ));
 
       final password = context.readLine(noRender: true);
 
-      if (widget.confirmation) {
+      if (component.confirmation) {
         context.write(promptInput(
-          theme: widget.theme,
-          message: widget.confirmPrompt ?? widget.prompt,
+          theme: component.theme,
+          message: component.confirmPrompt ?? component.prompt,
         ));
 
         final repeated = context.readLine(noRender: true);
