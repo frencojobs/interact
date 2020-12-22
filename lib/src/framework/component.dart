@@ -23,7 +23,7 @@ abstract class Component<T> {
   T interact() {
     // Initialize the state
     final state = createState();
-    state._widget = this;
+    state._component = this;
     state.init();
     _initLinesCount = state.context.linesCount;
     state.context.resetLinesCount();
