@@ -73,7 +73,10 @@ class _InputState extends State<Input> {
         message: component.prompt,
         hint: component.defaultValue,
       ));
-      final line = context.readLine(initialText: component.initialText);
+      final input = context.readLine(initialText: component.initialText);
+      final line = input.isEmpty && component.defaultValue != null
+          ? component.defaultValue
+          : input;
 
       if (component.validator != null) {
         try {
@@ -87,11 +90,7 @@ class _InputState extends State<Input> {
       }
 
       setState(() {
-        if (line.isEmpty && component.defaultValue != null) {
-          value = component.defaultValue;
-        } else {
-          value = line;
-        }
+        value = line;
       });
 
       return value;
