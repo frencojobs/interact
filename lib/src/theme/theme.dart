@@ -25,6 +25,9 @@ class Theme {
   final String checkedItemPrefix;
   final String uncheckedItemPrefix;
 
+  final String pickedItemPrefix;
+  final String unpickedItemPrefix;
+
   const Theme({
     @required this.inputPrefix,
     @required this.inputSuffix,
@@ -41,6 +44,8 @@ class Theme {
     @required this.inactiveItemStyle,
     @required this.checkedItemPrefix,
     @required this.uncheckedItemPrefix,
+    @required this.pickedItemPrefix,
+    @required this.unpickedItemPrefix,
   });
 
   static final defaultTheme = Theme(
@@ -59,5 +64,7 @@ class Theme {
     inactiveItemStyle: (x) => x,
     checkedItemPrefix: '✔'.green(),
     uncheckedItemPrefix: ' ',
+    pickedItemPrefix: '❯'.green(),
+    unpickedItemPrefix: ' ',
   );
 }
