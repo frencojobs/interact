@@ -11,13 +11,13 @@ class Select extends Component<int> {
   final String prompt;
   final int initialIndex;
   final List<String> options;
-  Theme theme = Theme.defaultTheme;
+  final Theme theme;
 
   Select({
     @required this.prompt,
     @required this.options,
     this.initialIndex = 0,
-  });
+  }) : theme = Theme.defaultTheme;
 
   Select.withTheme({
     @required this.prompt,

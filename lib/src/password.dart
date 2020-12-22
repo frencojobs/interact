@@ -11,14 +11,14 @@ class Password extends Component<String> {
   final bool confirmation;
   final String confirmPrompt;
   final String confirmError;
-  Theme theme = Theme.defaultTheme;
+  final Theme theme;
 
   Password({
     @required this.prompt,
     this.confirmation = false,
     this.confirmPrompt,
     this.confirmError,
-  });
+  }) : theme = Theme.defaultTheme;
 
   Password.withTheme({
     @required this.theme,
