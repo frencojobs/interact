@@ -22,6 +22,9 @@ class Theme {
   final StyleFunction activeItemStyle;
   final StyleFunction inactiveItemStyle;
 
+  final String checkedItemPrefix;
+  final String uncheckedItemPrefix;
+
   const Theme({
     @required this.inputPrefix,
     @required this.inputSuffix,
@@ -36,13 +39,11 @@ class Theme {
     @required this.inactiveItemPrefix,
     @required this.activeItemStyle,
     @required this.inactiveItemStyle,
+    @required this.checkedItemPrefix,
+    @required this.uncheckedItemPrefix,
   });
 
   static final defaultTheme = Theme(
-    activeItemPrefix: '❯'.green(),
-    inactiveItemPrefix: ' ',
-    activeItemStyle: (x) => x.cyan(),
-    inactiveItemStyle: (x) => x,
     inputPrefix: '?'.yellow(),
     inputSuffix: '›'.grey(),
     successPrefix: '✔'.green(),
@@ -52,5 +53,11 @@ class Theme {
     hintStyle: (x) => x.grey(),
     valueStyle: (x) => x.green(),
     defaultStyle: (x) => x.cyan(),
+    activeItemPrefix: '❯'.green(),
+    inactiveItemPrefix: ' ',
+    activeItemStyle: (x) => x.cyan(),
+    inactiveItemStyle: (x) => x,
+    checkedItemPrefix: '✔'.green(),
+    uncheckedItemPrefix: ' ',
   );
 }
