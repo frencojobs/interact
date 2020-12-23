@@ -29,6 +29,12 @@ class Theme {
 
   final bool showActiveCursor;
 
+  final String progressPrefix;
+  final String progressSuffix;
+  final String emptyProgress;
+  final String filledProgress;
+  final String leadingProgress;
+
   const Theme({
     @required this.inputPrefix,
     @required this.inputSuffix,
@@ -50,6 +56,11 @@ class Theme {
     @required this.pickedItemPrefix,
     @required this.unpickedItemPrefix,
     @required this.showActiveCursor,
+    @required this.progressPrefix,
+    @required this.progressSuffix,
+    @required this.emptyProgress,
+    @required this.filledProgress,
+    @required this.leadingProgress,
   });
 
   static final defaultTheme = colorfulTheme;
@@ -75,6 +86,11 @@ class Theme {
     pickedItemPrefix: '[x]',
     unpickedItemPrefix: '[ ]',
     showActiveCursor: true,
+    progressPrefix: '[',
+    progressSuffix: ']',
+    emptyProgress: ' ',
+    filledProgress: '#',
+    leadingProgress: '>',
   );
 
   static final colorfulTheme = Theme(
@@ -98,5 +114,10 @@ class Theme {
     pickedItemPrefix: '❯'.green(),
     unpickedItemPrefix: ' ',
     showActiveCursor: false,
+    progressPrefix: '',
+    progressSuffix: '',
+    emptyProgress: '░',
+    filledProgress: '█',
+    leadingProgress: '█',
   );
 }
