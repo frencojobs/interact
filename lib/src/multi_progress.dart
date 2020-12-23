@@ -1,19 +1,21 @@
 import 'framework/framework.dart';
-import 'spinner.dart';
+import 'progress.dart';
 
-class MultiSpinner {
+class MultiProgress {
   final Context _context = Context();
   final List<StringBuffer> _lines = [];
-  final List<SpinnerState> _spinners = [];
+  final List<ProgressState> _bars = [];
   final List<void Function()> _disposers = [];
 
   void dispose(void Function() fn) {
     fn();
 
-    if (_disposers.length == _spinners.length) {
+    if (_disposers.length == _bars.length) {
       for (final disposer in _disposers) {
         disposer();
       }
+
+      _context.wipe();
     }
   }
 
@@ -30,23 +32,27 @@ class MultiSpinner {
     _context.increaseRenderCount();
   }
 
-  SpinnerState add(Spinner spinner) {
-    final index = _spinners.length;
+  ProgressState add(Progress progress) {
+    final index = _bars.length;
 
     _lines.add(StringBuffer());
-    spinner.setContext(BufferContext(
+    progress.setContext(BufferContext(
       buffer: _lines[index],
       setState: render,
     ));
-    _spinners.add(spinner.interact());
+    _bars.add(progress.interact());
 
-    final state = SpinnerState(done: () {
-      final disposer = _spinners[index].done();
-      dispose(() {
-        _disposers.add(disposer);
-      });
-      return disposer;
-    });
+    final state = ProgressState(
+      current: _bars[index].current,
+      increase: (n) => _bars[index].increase(n),
+      done: () {
+        final disposer = _bars[index].done();
+        dispose(() {
+          _disposers.add(disposer);
+        });
+        return disposer;
+      },
+    );
 
     return state;
   }

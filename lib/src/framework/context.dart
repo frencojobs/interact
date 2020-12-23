@@ -165,3 +165,28 @@ class Context {
     return key;
   }
 }
+
+/// Unlike a normal [Context], [BufferContext] writes lines to a specified
+/// [StringBuffer] and run a reload function on every line written.
+///
+/// Useful when waiting for a rendering context when there is multiple
+/// of them rendering at the same time. [MultipleSpinner] component used it
+/// so when [Spinner]s are being rendered, they get rendered to a [String].
+/// It later used the [setState] function to rendered the whole [String]
+/// containing multiple [BufferContext]s to the console.
+class BufferContext extends Context {
+  final StringBuffer buffer;
+  final void Function() setState;
+
+  BufferContext({
+    @required this.buffer,
+    @required this.setState,
+  });
+
+  @override
+  void writeln([String text]) {
+    buffer.clear();
+    buffer.write(text);
+    setState();
+  }
+}

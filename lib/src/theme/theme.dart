@@ -95,7 +95,7 @@ class Theme {
     progressSuffix: ']',
     emptyProgress: ' ',
     filledProgress: '#',
-    leadingProgress: '>',
+    leadingProgress: '#',
     spinner: '⠁⠂⠄⡀⢀⠠⠐⠈',
     spinningInterval: 80,
   );
