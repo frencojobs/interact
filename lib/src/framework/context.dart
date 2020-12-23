@@ -20,6 +20,9 @@ class Context {
   void increaseLinesCount() => _linesCount++;
   void resetLinesCount() => _linesCount = 0;
 
+  /// Returns terminal width in terms of characters.
+  int get windowWidth => _console.windowWidth;
+
   /// Shows the cursor.
   void showCursor() => _console.showCursor();
 
