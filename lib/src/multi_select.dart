@@ -34,6 +34,8 @@ class _MultiSelectState extends State<MultiSelect> {
 
   @override
   void init() {
+    super.init();
+
     index = 0;
     selection = [];
     if (component.options.isEmpty) {
@@ -77,6 +79,8 @@ class _MultiSelectState extends State<MultiSelect> {
       value: values,
     ));
     context.showCursor();
+
+    super.dispose();
   }
 
   @override

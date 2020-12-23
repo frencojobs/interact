@@ -4,7 +4,7 @@ typedef VoidCallback = void Function();
 
 /// Provides the structure and `setState` function.
 abstract class State<T extends Component> {
-  final _context = Context();
+  Context _context;
   Context get context => _context;
 
   T _component;
@@ -22,8 +22,16 @@ abstract class State<T extends Component> {
     context.increaseRenderCount();
   }
 
-  void init() {}
-  void dispose() {}
+  @mustCallSuper
+  void init() {
+    _context = Context();
+  }
+
+  @mustCallSuper
+  void dispose() {
+    _context = null;
+  }
+
   void render() {}
   dynamic interact();
 }

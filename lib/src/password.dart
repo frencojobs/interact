@@ -35,6 +35,8 @@ class _PasswordState extends State<Password> {
 
   @override
   void init() {
+    super.init();
+
     hasError = false;
   }
 
@@ -47,6 +49,8 @@ class _PasswordState extends State<Password> {
         value: component.theme.hiddenPrefix,
       ),
     );
+
+    super.dispose();
   }
 
   @override

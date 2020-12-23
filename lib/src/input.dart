@@ -41,6 +41,7 @@ class _InputState extends State<Input> {
 
   @override
   void init() {
+    super.init();
     value = component.initialText;
   }
 
@@ -51,6 +52,7 @@ class _InputState extends State<Input> {
       message: component.prompt,
       value: value,
     ));
+    super.dispose();
   }
 
   @override

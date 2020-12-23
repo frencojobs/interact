@@ -34,6 +34,7 @@ class _ConfirmState extends State<Confirm> {
 
   @override
   void init() {
+    super.init();
     answer = component.defaultValue;
     context.hideCursor();
   }
@@ -46,6 +47,8 @@ class _ConfirmState extends State<Confirm> {
       value: answer ? 'yes' : 'no',
     ));
     context.showCursor();
+
+    super.dispose();
   }
 
   @override

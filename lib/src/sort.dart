@@ -35,6 +35,8 @@ class _SortState extends State<Sort> {
 
   @override
   void init() {
+    super.init();
+
     if (component.options.isEmpty) {
       throw Exception("Options can't be empty");
     }
@@ -59,6 +61,8 @@ class _SortState extends State<Sort> {
           : '',
     ));
     context.showCursor();
+
+    super.dispose();
   }
 
   @override

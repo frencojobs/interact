@@ -9,8 +9,9 @@ part of interact.framework;
 ///
 /// Generic [T] is the return type of the [Component] which
 /// will be returned from the `interact()` function.
-abstract class Component<T> {
+abstract class Component<T extends dynamic> {
   State createState();
+  void disposeState(State state) => state.dispose();
 
   // Temporarily stores the number of lines written
   // by the `init()` here
@@ -41,7 +42,7 @@ abstract class Component<T> {
 
     // Dispose the lines written by `init()`
     state.context.erasePreviousLine(_initLinesCount);
-    state.dispose();
+    disposeState(state);
 
     return output as T;
   }

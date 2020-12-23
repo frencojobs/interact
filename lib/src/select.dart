@@ -33,6 +33,8 @@ class _SelectState extends State<Select> {
 
   @override
   void init() {
+    super.init();
+
     if (component.options.isEmpty) {
       throw Exception("Options can't be empty");
     }
@@ -58,6 +60,8 @@ class _SelectState extends State<Select> {
       value: component.options[index],
     ));
     context.showCursor();
+
+    super.dispose();
   }
 
   @override
