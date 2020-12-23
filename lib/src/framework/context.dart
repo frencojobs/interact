@@ -20,6 +20,12 @@ class Context {
   void increaseLinesCount() => _linesCount++;
   void resetLinesCount() => _linesCount = 0;
 
+  /// Removes the lines from the last render and reset the lines count.
+  void wipe() {
+    erasePreviousLine(linesCount);
+    resetLinesCount();
+  }
+
   /// Returns terminal width in terms of characters.
   int get windowWidth => _console.windowWidth;
 
@@ -34,9 +40,9 @@ class Context {
 
   /// Increases the number of lines written for the current render,
   /// and writes a line to the the console.
-  void writeln([String text, TextAlignment alignment]) {
+  void writeln([String text]) {
     increaseLinesCount();
-    _console.writeLine(text, alignment);
+    _console.writeLine(text);
   }
 
   /// Erase one line above the current cursor by default.

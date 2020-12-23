@@ -35,6 +35,9 @@ class Theme {
   final String filledProgress;
   final String leadingProgress;
 
+  final String spinner;
+  final int spinningInterval;
+
   const Theme({
     @required this.inputPrefix,
     @required this.inputSuffix,
@@ -61,6 +64,8 @@ class Theme {
     @required this.emptyProgress,
     @required this.filledProgress,
     @required this.leadingProgress,
+    @required this.spinner,
+    @required this.spinningInterval,
   });
 
   static final defaultTheme = colorfulTheme;
@@ -91,6 +96,8 @@ class Theme {
     emptyProgress: ' ',
     filledProgress: '#',
     leadingProgress: '>',
+    spinner: '⠁⠂⠄⡀⢀⠠⠐⠈',
+    spinningInterval: 80,
   );
 
   static final colorfulTheme = Theme(
@@ -119,5 +126,7 @@ class Theme {
     emptyProgress: '░',
     filledProgress: '█',
     leadingProgress: '█',
+    spinner: '⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏',
+    spinningInterval: 80,
   );
 }

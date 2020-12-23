@@ -36,7 +36,6 @@ class _PasswordState extends State<Password> {
   @override
   void init() {
     super.init();
-
     hasError = false;
   }
 

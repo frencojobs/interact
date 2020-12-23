@@ -13,6 +13,10 @@ abstract class Component<T extends dynamic> {
   State createState();
   void disposeState(State state) => state.dispose();
 
+  /// Pipes the state after running `createState` in case of
+  /// needing to handle the state from outside.
+  State pipeState(State state) => state;
+
   // Temporarily stores the number of lines written
   // by the `init()` here
   // to clean them up after `dispose()`
@@ -23,7 +27,7 @@ abstract class Component<T extends dynamic> {
   /// Also does the initial rendering.
   T interact() {
     // Initialize the state
-    final state = createState();
+    final state = pipeState(createState());
     state._component = this;
     state.init();
     _initLinesCount = state.context.linesCount;
@@ -37,8 +41,7 @@ abstract class Component<T extends dynamic> {
     final output = state.interact();
 
     // Clean up once again at last for the first render
-    state.context.erasePreviousLine(state.context.linesCount);
-    state.context.resetLinesCount();
+    state.context.wipe();
 
     // Dispose the lines written by `init()`
     state.context.erasePreviousLine(_initLinesCount);

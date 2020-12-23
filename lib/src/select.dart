@@ -6,10 +6,10 @@ import 'theme/theme.dart';
 import 'utils/prompt.dart';
 
 class Select extends Component<int> {
+  final Theme theme;
   final String prompt;
   final int initialIndex;
   final List<String> options;
-  final Theme theme;
 
   Select({
     @required this.prompt,
