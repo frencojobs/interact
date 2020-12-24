@@ -2,9 +2,31 @@
 
 A collection of customizable interactive command-line components.
 
+<br>
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [API Documentation](#api-documentation)
+  - [Components](#components)
+    - [Confirm Component](#confirm-component)
+    - [Input Component](#input-component)
+    - [Password Component](#password-component)
+    - [Select Component](#select-component)
+    - [MultiSelect Component](#multiselect-component)
+    - [Sort Component](#sort-component)
+    - [Spinner and MultiSpinner Components](#spinner-and-multispinner-components)
+    - [Progress and MultiProgress Components](#progress-and-multiprogress-components)
+  - [Customizing Themes](#customizing-themes)
+- [Acknowledgement](#acknowledgement)
+- [License](#license)
+
+<br>
+
 ## Overview
 
-The library contains a bunch of command-line components that are easy to use and customizable, including text and password inputs, radio or select inputs, checkbox or multiple select inputs, spinners, and progress bars. Examples for all the available components can be found in the `example` folder, and the API Documentation section will cover all about them.
+The library contains a bunch of command-line components that are easy to use and customizable, including text and password inputs, radio or select inputs, checkbox or multiple select inputs, spinners, and progress bars. Examples for all the available components can be found in the `example` folder, and the [API Documentation](#api-documentation) section will cover all about them.
 
 As an overview, you can make a `Select` component like this.
 
@@ -32,7 +54,7 @@ Install the latest version of tint as a dependency as shown in [pub.dev](https:/
 
 These are the snippets of components with their properties and arguments. Check the [pub documentation](https://pub.dev/documentation/interact/latest/) to get to know more about them in detail.
 
-**Confirm Component**
+#### Confirm Component
 
 A confirm component asks the user for a simple yes or no and will return a boolean accordingly.
 
@@ -46,7 +68,7 @@ final answer = Confirm(
 
 If `waitForNewLine` is true, the prompt will wait for an <kbd>Enter</kbd> key from the user regardless of the answer.
 
-**Input Component**
+#### Input Component
 
 An input component asks the user for a string that could be validated.
 
@@ -67,7 +89,7 @@ final email = Input(
 
 The message passed in the `ValidationError` exception will be shown as an error until the validator returns true.
 
-**Password Component**
+#### Password Component
 
 A password component behaves pretty much the same as an input component, but the user input will be hidden and by default, it has a repeat password validator that checks if two password inputs are the same or not.
 
@@ -80,7 +102,7 @@ final password = Password(
 ).interact();
 ```
 
-**Select Component**
+#### Select Component
 
 A select component asks the user to choose between the options supplied and the index of the chosen option will be returned.
 
@@ -94,7 +116,7 @@ final selection = Select(
 ).interact();
 ```
 
-**MultiSelect Component**
+#### MultiSelect Component
 
 A multi-select component asks the user for multiple options check by using the <kbd>SpaceBar</kbd>. Similarly, the multi-select component will return a list of selected indexes.
 
@@ -106,7 +128,7 @@ final answers = MultiSelect(
 ).interact();
 ```
 
-**Sort Component**
+#### Sort Component
 
 A sort component asks the user to sort the given list of options and returns the list ordered by the user.
 
@@ -120,7 +142,7 @@ final sorted = Sort(
 
 Sometimes the list given can be massive, so setting the `showOutput` to false makes the list not be shown in the success prompt.
 
-**Spinner and MultiSpinner Components**
+#### Spinner and MultiSpinner Components
 
 A spinner will show a spinning indicator until the user calls it's `done` method. When it's done, it shows the icon given in place of the spinner.
 
@@ -153,7 +175,7 @@ horse.done();
 
 Now you can have multiple of them without breaking things.
 
-**Progress and MultiProgress Components**
+#### Progress and MultiProgress Components
 
 A progress component shows a progress bar.
 
