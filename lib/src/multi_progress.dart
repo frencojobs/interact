@@ -45,6 +45,7 @@ class MultiProgress {
     final state = ProgressState(
       current: _bars[index].current,
       increase: (n) => _bars[index].increase(n),
+      clear: () => _bars[index].clear(),
       done: () {
         final disposer = _bars[index].done();
         dispose(() {
