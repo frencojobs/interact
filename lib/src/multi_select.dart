@@ -56,8 +56,8 @@ class _MultiSelectState extends State<MultiSelect> {
     if (component.defaults != null) {
       if (component.defaults.length != component.options.length) {
         throw Exception(
-          "Default selections have a different length of ${component.defaults.length} "
-          "than options of ${component.options.length}",
+          'Default selections have a different length of ${component.defaults.length} '
+          'than options of ${component.options.length}',
         );
       } else {
         selection.addAll(
