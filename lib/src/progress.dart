@@ -1,4 +1,5 @@
 import 'package:meta/meta.dart';
+import 'package:tint/tint.dart';
 
 import 'framework/framework.dart';
 import 'theme/theme.dart';
@@ -48,11 +49,13 @@ class Progress extends Component<ProgressState> {
 
 class ProgressState {
   int current;
+  void Function() clear;
   void Function(int) increase;
   void Function() Function() done;
 
   ProgressState({
     @required this.current,
+    @required this.clear,
     @required this.increase,
     @required this.done,
   });
@@ -82,20 +85,18 @@ class _ProgressState extends State<Progress> {
     final line = StringBuffer();
     final leftPrompt = component.leftPrompt(current);
     final rightPrompt = component.rightPrompt(current);
-    final occupied = component.theme.progressPrefix.length +
-        component.theme.progressSuffix.length +
-        leftPrompt.length +
-        rightPrompt.length;
+    final occupied = component.theme.progressPrefix.strip().length +
+        component.theme.progressSuffix.strip().length +
+        leftPrompt.strip().length +
+        rightPrompt.strip().length;
     final available = (context.windowWidth * component.size).round() - occupied;
 
     line.write(leftPrompt);
     line.write(component.theme.progressPrefix);
     line.write(_progress(
+      component.theme,
       available,
       (available / component.length * current).round(),
-      component.theme.emptyProgress,
-      component.theme.filledProgress,
-      component.theme.leadingProgress,
     ));
     line.write(component.theme.progressSuffix);
     line.write(rightPrompt);
@@ -113,6 +114,11 @@ class _ProgressState extends State<Progress> {
             current += n;
           });
         }
+      },
+      clear: () {
+        setState(() {
+          current = 0;
+        });
       },
       done: () {
         setState(() {
@@ -132,15 +138,20 @@ class _ProgressState extends State<Progress> {
   }
 
   String _progress(
+    Theme theme,
     int length,
     int filled,
-    String empty,
-    String filler,
-    String leader,
   ) {
-    return ''
-        .padRight(filled - 1, filler)
-        .padRight(filled, filled == length ? filler : leader)
-        .padRight(length, empty);
+    final f = theme
+        .filledProgressStyle(''.padRight(filled - 1, theme.filledProgress));
+    final l = filled == 0
+        ? ''
+        : filled == length
+            ? theme.filledProgressStyle(theme.filledProgress)
+            : theme.leadingProgressStyle(theme.leadingProgress);
+    final e = theme
+        .emptyProgressStyle(''.padRight(length - filled, theme.emptyProgress));
+
+    return '$f$l$e';
   }
 }
