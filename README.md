@@ -44,15 +44,21 @@ It will result in something like this,
 
 <img src="https://i.imgur.com/boGsIn4.png" />
 
+<br>
+
 ## Installation
 
 Install the latest version of tint as a dependency as shown in [pub.dev](https://pub.dev/packages/interact).
+
+<br>
 
 ## API Documentation
 
 ### Components
 
 These are the snippets of components with their properties and arguments. Check the [pub documentation](https://pub.dev/documentation/interact/latest/) to get to know more about them in detail.
+
+<br>
 
 #### Confirm Component
 
@@ -67,6 +73,8 @@ final answer = Confirm(
 ```
 
 If `waitForNewLine` is true, the prompt will wait for an <kbd>Enter</kbd> key from the user regardless of the answer.
+
+<br>
 
 #### Input Component
 
@@ -89,6 +97,8 @@ final email = Input(
 
 The message passed in the `ValidationError` exception will be shown as an error until the validator returns true.
 
+<br>
+
 #### Password Component
 
 A password component behaves pretty much the same as an input component, but the user input will be hidden and by default, it has a repeat password validator that checks if two password inputs are the same or not.
@@ -101,6 +111,8 @@ final password = Password(
   confirmError: 'Passwords do not match' // optional
 ).interact();
 ```
+
+<br>
 
 #### Select Component
 
@@ -116,6 +128,8 @@ final selection = Select(
 ).interact();
 ```
 
+<br>
+
 #### MultiSelect Component
 
 A multi-select component asks the user for multiple options check by using the <kbd>SpaceBar</kbd>. Similarly, the multi-select component will return a list of selected indexes.
@@ -127,6 +141,8 @@ final answers = MultiSelect(
   defaults: [false, true, false], // optional, will be all false by default
 ).interact();
 ```
+
+<br>
 
 #### Sort Component
 
@@ -141,6 +157,8 @@ final sorted = Sort(
 ```
 
 Sometimes the list given can be massive, so setting the `showOutput` to false makes the list not be shown in the success prompt.
+
+<br>
 
 #### Spinner and MultiSpinner Components
 
@@ -174,6 +192,8 @@ horse.done();
 ```
 
 Now you can have multiple of them without breaking things.
+
+<br>
 
 #### Progress and MultiProgress Components
 
@@ -214,6 +234,8 @@ for (var i = 0; i < 500; i++) {
 p1.done();
 ```
 
+<br>
+
 ### Customizing Themes
 
 Because most of the visually rendered parts come from the theme object which is available for all components, you can customize a lot of them by changing the theme. Changing a theme for a component can be done by using the `withTheme` constructor.
@@ -244,9 +266,13 @@ Theme customTheme = Theme.colorfulTheme.copyWith(
 );
 ```
 
+<br>
+
 ## Acknowledgement
 
 This library is mostly inspired by [dialouger](https://github.com/mitsuhiko/dialoguer) library from Rust. The lack of a properly maintained library for Dart with a well-made API is what pushed me into making this library.
+
+<br>
 
 ## License
 
