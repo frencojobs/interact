@@ -34,6 +34,9 @@ class Theme {
   final String emptyProgress;
   final String filledProgress;
   final String leadingProgress;
+  final StyleFunction emptyProgressStyle;
+  final StyleFunction filledProgressStyle;
+  final StyleFunction leadingProgressStyle;
 
   final String spinner;
   final int spinningInterval;
@@ -64,9 +67,78 @@ class Theme {
     @required this.emptyProgress,
     @required this.filledProgress,
     @required this.leadingProgress,
+    @required this.emptyProgressStyle,
+    @required this.filledProgressStyle,
+    @required this.leadingProgressStyle,
     @required this.spinner,
     @required this.spinningInterval,
   });
+
+  Theme copyWith({
+    String inputPrefix,
+    String inputSuffix,
+    String successPrefix,
+    String successSuffix,
+    String errorPrefix,
+    String hiddenPrefix,
+    StyleFunction messageStyle,
+    StyleFunction errorStyle,
+    StyleFunction hintStyle,
+    StyleFunction valueStyle,
+    StyleFunction defaultStyle,
+    String activeItemPrefix,
+    String inactiveItemPrefix,
+    StyleFunction activeItemStyle,
+    StyleFunction inactiveItemStyle,
+    String checkedItemPrefix,
+    String uncheckedItemPrefix,
+    String pickedItemPrefix,
+    String unpickedItemPrefix,
+    bool showActiveCursor,
+    String progressPrefix,
+    String progressSuffix,
+    String emptyProgress,
+    String filledProgress,
+    String leadingProgress,
+    StyleFunction emptyProgressStyle,
+    StyleFunction filledProgressStyle,
+    StyleFunction leadingProgressStyle,
+    String spinner,
+    int spinningInterval,
+  }) {
+    return Theme(
+      inputPrefix: inputPrefix ?? this.inputPrefix,
+      inputSuffix: inputSuffix ?? this.inputSuffix,
+      successPrefix: successPrefix ?? this.successPrefix,
+      successSuffix: successSuffix ?? this.successSuffix,
+      errorPrefix: errorPrefix ?? this.errorPrefix,
+      hiddenPrefix: hiddenPrefix ?? this.hiddenPrefix,
+      messageStyle: messageStyle ?? this.messageStyle,
+      errorStyle: errorStyle ?? this.errorStyle,
+      hintStyle: hintStyle ?? this.hintStyle,
+      valueStyle: valueStyle ?? this.valueStyle,
+      defaultStyle: defaultStyle ?? this.defaultStyle,
+      activeItemPrefix: activeItemPrefix ?? this.activeItemPrefix,
+      inactiveItemPrefix: inactiveItemPrefix ?? this.inactiveItemPrefix,
+      activeItemStyle: activeItemStyle ?? this.activeItemStyle,
+      inactiveItemStyle: inactiveItemStyle ?? this.inactiveItemStyle,
+      checkedItemPrefix: checkedItemPrefix ?? this.checkedItemPrefix,
+      uncheckedItemPrefix: uncheckedItemPrefix ?? this.uncheckedItemPrefix,
+      pickedItemPrefix: pickedItemPrefix ?? this.pickedItemPrefix,
+      unpickedItemPrefix: unpickedItemPrefix ?? this.unpickedItemPrefix,
+      showActiveCursor: showActiveCursor ?? this.showActiveCursor,
+      progressPrefix: progressPrefix ?? this.progressPrefix,
+      progressSuffix: progressSuffix ?? this.progressSuffix,
+      emptyProgress: emptyProgress ?? this.emptyProgress,
+      filledProgress: filledProgress ?? this.filledProgress,
+      leadingProgress: leadingProgress ?? this.leadingProgress,
+      emptyProgressStyle: emptyProgressStyle ?? this.emptyProgressStyle,
+      filledProgressStyle: filledProgressStyle ?? this.filledProgressStyle,
+      leadingProgressStyle: leadingProgressStyle ?? this.leadingProgressStyle,
+      spinner: spinner ?? this.spinner,
+      spinningInterval: spinningInterval ?? this.spinningInterval,
+    );
+  }
 
   static final defaultTheme = colorfulTheme;
 
@@ -96,6 +168,9 @@ class Theme {
     emptyProgress: ' ',
     filledProgress: '#',
     leadingProgress: '#',
+    emptyProgressStyle: (x) => x,
+    filledProgressStyle: (x) => x,
+    leadingProgressStyle: (x) => x,
     spinner: '⠁⠂⠄⡀⢀⠠⠐⠈',
     spinningInterval: 80,
   );
@@ -126,6 +201,9 @@ class Theme {
     emptyProgress: '░',
     filledProgress: '█',
     leadingProgress: '█',
+    emptyProgressStyle: (x) => x,
+    filledProgressStyle: (x) => x,
+    leadingProgressStyle: (x) => x,
     spinner: '⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏',
     spinningInterval: 80,
   );
