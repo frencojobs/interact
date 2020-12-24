@@ -22,6 +22,8 @@ abstract class Component<T extends dynamic> {
   // to clean them up after `dispose()`
   int _initLinesCount = 0;
 
+  /// Starts the rendering processs.
+  ///
   /// Handles not only rendering the `interact` function from the [State]
   /// but also the lifecycle methods such as `init` and `dispose`.
   /// Also does the initial rendering.
