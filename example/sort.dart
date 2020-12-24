@@ -10,5 +10,5 @@ void main() {
   ).interact();
 
   stdout.writeln("${sorted[0]} is everyone's favorite!");
-  stdout.writeln("My least favorite is also ${sorted[3]}.");
+  stdout.writeln('My least favorite is also ${sorted[3]}.');
 }
