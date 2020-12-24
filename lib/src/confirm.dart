@@ -5,19 +5,29 @@ import 'framework/framework.dart';
 import 'theme/theme.dart';
 import 'utils/prompt.dart';
 
+/// A confirm component.
 class Confirm extends Component<bool> {
+  /// The theme of the component.
   final Theme theme;
+
+  /// The prompt to be shown together with the user's input.
   final String prompt;
 
+  /// The value to be used as an initial value.
   final bool defaultValue;
+
+  /// Determines whether to wait for the Enter key after
+  /// the user has responded.
   final bool waitForNewLine;
 
+  /// Constructs a [Confirm] component with the default theme.
   Confirm({
     @required this.prompt,
     this.defaultValue,
     this.waitForNewLine = false,
   }) : theme = Theme.defaultTheme;
 
+  /// Constructs a [Confirm] component with the supplied theme.
   Confirm.withTheme({
     @required this.theme,
     @required this.prompt,

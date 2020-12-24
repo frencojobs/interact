@@ -5,18 +5,30 @@ import 'framework/framework.dart';
 import 'theme/theme.dart';
 import 'utils/prompt.dart';
 
+/// A sortable list component.
 class Sort extends Component<List<String>> {
+  /// The theme of the component.
   final Theme theme;
+
+  /// The prompt to be shown together with the user's input.
   final String prompt;
+
+  /// Indicates whether to show the sorted output on the
+  /// success prompt or not.
   final bool showOutput;
+
+  /// The [List] of available [String] options to show to
+  /// the user.
   final List<String> options;
 
+  /// Constructs a [Sort] component with the default theme.
   Sort({
     @required this.prompt,
     @required this.options,
     this.showOutput = true,
   }) : theme = Theme.defaultTheme;
 
+  /// Constructs a [Sort] component with the default theme.
   Sort.withTheme({
     @required this.prompt,
     @required this.options,

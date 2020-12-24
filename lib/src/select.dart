@@ -5,18 +5,31 @@ import 'framework/framework.dart';
 import 'theme/theme.dart';
 import 'utils/prompt.dart';
 
+/// A selector component.
 class Select extends Component<int> {
+  /// The theme of the component.
   final Theme theme;
+
+  /// The prompt to be shown together with the user's input.
   final String prompt;
+
+  /// The index to be selected by default.
+  ///
+  /// Will be `0` by default.
   final int initialIndex;
+
+  /// The [List] of available [String] options to show
+  /// to the user.
   final List<String> options;
 
+  /// Constructs a [Select] component with the default theme.
   Select({
     @required this.prompt,
     @required this.options,
     this.initialIndex = 0,
   }) : theme = Theme.defaultTheme;
 
+  /// Constructs a [Select] component with the supplied theme.
   Select.withTheme({
     @required this.prompt,
     @required this.options,

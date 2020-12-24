@@ -1,8 +1,12 @@
 import 'package:meta/meta.dart';
 import 'package:tint/tint.dart';
 
+/// [Function] takes a [String] and returns a [String].
+///
+/// Used for styling texts in the [Theme].
 typedef StyleFunction = String Function(String);
 
+/// The theme to be used by components.
 class Theme {
   final String inputPrefix;
   final String inputSuffix;
@@ -41,6 +45,7 @@ class Theme {
   final String spinner;
   final int spinningInterval;
 
+  /// Constructs a new [Theme] with all of it's properties.
   const Theme({
     @required this.inputPrefix,
     @required this.inputSuffix,
@@ -74,6 +79,8 @@ class Theme {
     @required this.spinningInterval,
   });
 
+  /// Copy current theme with new properties and create a
+  /// new [Theme] from it.
   Theme copyWith({
     String inputPrefix,
     String inputSuffix,
@@ -140,8 +147,10 @@ class Theme {
     );
   }
 
+  /// An alias to [colorfulTheme].
   static final defaultTheme = colorfulTheme;
 
+  /// A very basic theme without colors.
   static final basicTheme = Theme(
     inputPrefix: '',
     inputSuffix: ':',
@@ -175,6 +184,7 @@ class Theme {
     spinningInterval: 80,
   );
 
+  /// A very colorful theme.
   static final colorfulTheme = Theme(
     inputPrefix: '?'.padRight(2).yellow(),
     inputSuffix: '›'.padLeft(2).grey(),

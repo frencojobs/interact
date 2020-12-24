@@ -5,18 +5,29 @@ import 'framework/framework.dart';
 import 'theme/theme.dart';
 import 'utils/prompt.dart';
 
+/// A multiple select or checkbox input component.
 class MultiSelect extends Component<List<int>> {
+  /// The theme of the component.
   final Theme theme;
+
+  /// The prompt to be shown together with the user's input.
   final String prompt;
+
+  /// The [List] of available [String] options to show to
+  /// the user.
   final List<String> options;
+
+  /// The default values to indicate which options are checked.
   final List<bool> defaults;
 
+  /// Constructs a [MultiSelect] component with the default theme.
   MultiSelect({
     @required this.prompt,
     @required this.options,
     this.defaults,
   }) : theme = Theme.defaultTheme;
 
+  /// Constructs a [MultiSelect] component with the supplied theme.
   MultiSelect.withTheme({
     @required this.prompt,
     @required this.options,

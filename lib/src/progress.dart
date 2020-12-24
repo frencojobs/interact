@@ -6,14 +6,31 @@ import 'theme/theme.dart';
 
 String _prompt(int x) => '';
 
+/// A progress bar component.
 class Progress extends Component<ProgressState> {
   Context _context;
+
+  /// The theme of the component.
   final Theme theme;
+
+  /// The length of the progress bar.
   final int length;
+
+  /// The size multiplier to be used when rendering
+  /// the progress bar.
+  ///
+  /// Will be `1` by default.
   final double size;
+
+  /// The prompt function to be shown on the left side
+  /// of the progress bar.
   final String Function(int) leftPrompt;
+
+  /// The prompt function to be shown on the right side
+  /// of the progress bar.
   final String Function(int) rightPrompt;
 
+  /// Constructs a [Progress] component with the default theme.
   Progress({
     @required this.length,
     this.size = 1.0,
@@ -21,6 +38,7 @@ class Progress extends Component<ProgressState> {
     this.rightPrompt = _prompt,
   }) : theme = Theme.defaultTheme;
 
+  /// Constructs a [Progress] component with the supplied theme.
   Progress.withTheme({
     @required this.theme,
     @required this.length,
@@ -47,12 +65,22 @@ class Progress extends Component<ProgressState> {
   void setContext(Context c) => _context = c;
 }
 
+/// Handles a progress bar's state.
 class ProgressState {
+  /// Current progress.
   int current;
+
+  /// Clears the [current] by setting it to `0`.
   void Function() clear;
+
+  /// Increases the [current] by the given value.
   void Function(int) increase;
+
+  /// To be run to indicate that the progress is done,
+  /// and the rendering can be wiped from the terminal.
   void Function() Function() done;
 
+  /// Constructs a [ProgressState] with it's all properties.
   ProgressState({
     @required this.current,
     @required this.clear,

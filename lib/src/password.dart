@@ -4,13 +4,26 @@ import 'framework/framework.dart';
 import 'theme/theme.dart';
 import 'utils/prompt.dart';
 
+/// A password input component.
 class Password extends Component<String> {
-  final String prompt;
-  final bool confirmation;
-  final String confirmPrompt;
-  final String confirmError;
+  /// The theme for the component.
   final Theme theme;
 
+  /// The prompt to be shown together with the user's input.
+  final String prompt;
+
+  /// Indicates whether to ask for the password again to confirm.
+  final bool confirmation;
+
+  /// The prompt to be shown when asking for the password
+  /// againg to confirm.
+  final String confirmPrompt;
+
+  /// The error message to be shown if the repeated password
+  /// did not match the initial password.
+  final String confirmError;
+
+  /// Constructs a [Password] component with the default theme.
   Password({
     @required this.prompt,
     this.confirmation = false,
@@ -18,6 +31,7 @@ class Password extends Component<String> {
     this.confirmError,
   }) : theme = Theme.defaultTheme;
 
+  /// Constructs a [Password] component with the supplied theme.
   Password.withTheme({
     @required this.theme,
     @required this.prompt,

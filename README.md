@@ -11,7 +11,7 @@ As an overview, you can make a `Select` component like this.
 ```dart
 final languages = ['Rust', 'Dart', 'TypeScript'];
 final selection = Select(
-  prompt: "Your favorite programming language",
+  prompt: 'Your favorite programming language',
   options: languages,
 ).interact();
 
@@ -22,11 +22,15 @@ It will result in something like this,
 
 <img src="https://i.imgur.com/boGsIn4.png" />
 
+## Installation
+
+Install the latest version of tint as a dependency as shown in [pub.dev](https://pub.dev/packages/interact).
+
 ## API Documentation
 
 ### Components
 
-These are the snippets of components with their properties and arguments. Check the [pub documentation]() to get to know more about them in detail.
+These are the snippets of components with their properties and arguments. Check the [pub documentation](https://pub.dev/documentation/interact/latest/) to get to know more about them in detail.
 
 **Confirm Component**
 
@@ -34,7 +38,7 @@ A confirm component asks the user for a simple yes or no and will return a boole
 
 ```dart
 final answer = Confirm(
-  prompt: "Does it work?",
+  prompt: 'Does it work?',
   defaultValue: true, // this is optional
   waitForNewLine: true, // optional and will be false by default
 ).interact();
@@ -69,9 +73,10 @@ A password component behaves pretty much the same as an input component, but the
 
 ```dart
 final password = Password(
-  prompt: "Password",
+  prompt: 'Password',
   confirmation: true, // optional and will be false by default
-  confirmPrompt: "Repeat password", // optional
+  confirmPrompt: 'Repeat password', // optional
+  confirmError: 'Passwords do not match' // optional
 ).interact();
 ```
 
@@ -83,7 +88,7 @@ A select component asks the user to choose between the options supplied and the 
 final languages = ['Rust', 'Dart', 'TypeScript'];
 
 final selection = Select(
-  prompt: "Your favorite programming language",
+  prompt: 'Your favorite programming language',
   options: languages,
   initialIndex: 2, // optional, will be 0 by default
 ).interact();
@@ -95,8 +100,8 @@ A multi-select component asks the user for multiple options check by using the <
 
 ```dart
 final answers = MultiSelect(
-  prompt: "Let me know your answers",
-  options: ["A", "B", "C"],
+  prompt: 'Let me know your answers',
+  options: ['A', 'B', 'C'],
   defaults: [false, true, false], // optional, will be all false by default
 ).interact();
 ```

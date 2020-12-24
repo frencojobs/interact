@@ -1,13 +1,14 @@
 import 'framework/framework.dart';
 import 'spinner.dart';
 
+/// A shared context and handler for rendering multiple [Spinner]s.
 class MultiSpinner {
   final Context _context = Context();
   final List<StringBuffer> _lines = [];
   final List<SpinnerState> _spinners = [];
   final List<void Function()> _disposers = [];
 
-  void dispose(void Function() fn) {
+  void _dispose(void Function() fn) {
     fn();
 
     if (_disposers.length == _spinners.length) {
@@ -17,7 +18,7 @@ class MultiSpinner {
     }
   }
 
-  void render() {
+  void _render() {
     if (_context.renderCount > 0) {
       _context.erasePreviousLine(_context.linesCount);
       _context.resetLinesCount();
@@ -30,19 +31,20 @@ class MultiSpinner {
     _context.increaseRenderCount();
   }
 
+  /// Adds a new [Spinner] to current [MultiSpinner].
   SpinnerState add(Spinner spinner) {
     final index = _spinners.length;
 
     _lines.add(StringBuffer());
     spinner.setContext(BufferContext(
       buffer: _lines[index],
-      setState: render,
+      setState: _render,
     ));
     _spinners.add(spinner.interact());
 
     final state = SpinnerState(done: () {
       final disposer = _spinners[index].done();
-      dispose(() {
+      _dispose(() {
         _disposers.add(disposer);
       });
       return disposer;

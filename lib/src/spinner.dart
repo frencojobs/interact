@@ -8,19 +8,33 @@ import 'theme/theme.dart';
 
 String _prompt(bool x) => '';
 
+/// A spinner or a loading indicator component.
 class Spinner extends Component<SpinnerState> {
   Context _context;
+
+  /// The theme of the component.
   final Theme theme;
+
+  /// The icon to be shown in place of the loading
+  /// indicator after it's done.
   final String icon;
+
+  /// The prompt function to be shown on the left side
+  /// of the spinning indicator or icon.
   final String Function(bool) leftPrompt;
+
+  /// The prompt function to be shown on the right side
+  /// of the spinning indicator or icon.
   final String Function(bool) rightPrompt;
 
+  /// Construts a [Spinner] component with the default theme.
   Spinner({
     @required this.icon,
     this.leftPrompt = _prompt,
     this.rightPrompt = _prompt,
   }) : theme = Theme.defaultTheme;
 
+  /// Constructs a [Spinner] component with the supplied theme.
   Spinner.withTheme({
     @required this.icon,
     @required this.theme,
@@ -39,14 +53,16 @@ class Spinner extends Component<SpinnerState> {
     if (_context != null) {
       state.setContext(_context);
     }
-
     return state;
   }
 
   void setContext(Context c) => _context = c;
 }
 
+/// Handles a [Spinner]'s state.
 class SpinnerState {
+  /// Function to be called to indicate that the
+  /// spinner is loaded.
   void Function() Function() done;
 
   SpinnerState({@required this.done});

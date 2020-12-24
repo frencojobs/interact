@@ -1,13 +1,14 @@
 import 'framework/framework.dart';
 import 'progress.dart';
 
+/// A shared context and handler for rendering multiple [Progress] bars.
 class MultiProgress {
   final Context _context = Context();
   final List<StringBuffer> _lines = [];
   final List<ProgressState> _bars = [];
   final List<void Function()> _disposers = [];
 
-  void dispose(void Function() fn) {
+  void _dispose(void Function() fn) {
     fn();
 
     if (_disposers.length == _bars.length) {
@@ -19,7 +20,7 @@ class MultiProgress {
     }
   }
 
-  void render() {
+  void _render() {
     if (_context.renderCount > 0) {
       _context.erasePreviousLine(_context.linesCount);
       _context.resetLinesCount();
@@ -32,13 +33,14 @@ class MultiProgress {
     _context.increaseRenderCount();
   }
 
+  /// Adds a new [Progress] to current [MultiProgress].
   ProgressState add(Progress progress) {
     final index = _bars.length;
 
     _lines.add(StringBuffer());
     progress.setContext(BufferContext(
       buffer: _lines[index],
-      setState: render,
+      setState: _render,
     ));
     _bars.add(progress.interact());
 
@@ -48,7 +50,7 @@ class MultiProgress {
       clear: () => _bars[index].clear(),
       done: () {
         final disposer = _bars[index].done();
-        dispose(() {
+        _dispose(() {
           _disposers.add(disposer);
         });
         return disposer;
