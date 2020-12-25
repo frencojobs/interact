@@ -7,20 +7,6 @@ import 'utils/prompt.dart';
 
 /// A sortable list component.
 class Sort extends Component<List<String>> {
-  /// The theme of the component.
-  final Theme theme;
-
-  /// The prompt to be shown together with the user's input.
-  final String prompt;
-
-  /// Indicates whether to show the sorted output on the
-  /// success prompt or not.
-  final bool showOutput;
-
-  /// The [List] of available [String] options to show to
-  /// the user.
-  final List<String> options;
-
   /// Constructs a [Sort] component with the default theme.
   Sort({
     @required this.prompt,
@@ -35,6 +21,20 @@ class Sort extends Component<List<String>> {
     @required this.theme,
     this.showOutput = true,
   });
+
+  /// The theme of the component.
+  final Theme theme;
+
+  /// The prompt to be shown together with the user's input.
+  final String prompt;
+
+  /// Indicates whether to show the sorted output on the
+  /// success prompt or not.
+  final bool showOutput;
+
+  /// The [List] of available [String] options to show to
+  /// the user.
+  final List<String> options;
 
   @override
   _SortState createState() => _SortState();

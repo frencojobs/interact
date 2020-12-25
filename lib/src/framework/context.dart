@@ -11,13 +11,25 @@ class Context {
   final _console = _defaultConsole;
 
   int _renderCount = 0;
+
+  /// Indicates how many times the [Context] has rendered.
   int get renderCount => _renderCount;
+
+  /// Increases the [renderCount] by one.
   void increaseRenderCount() => _renderCount++;
+
+  /// Sets the [renderCount] to `0`.
   void resetRenderCount() => _renderCount = 0;
 
   int _linesCount = 0;
+
+  /// Indicates how many lines the context is used for rendering.
   int get linesCount => _linesCount;
+
+  /// Increases the [linesCount] by one.
   void increaseLinesCount() => _linesCount++;
+
+  /// Sets the [linesCount] to `0`.
   void resetLinesCount() => _linesCount = 0;
 
   /// Removes the lines from the last render and reset the lines count.
@@ -175,13 +187,17 @@ class Context {
 /// It later used the [setState] function to rendered the whole [String]
 /// containing multiple [BufferContext]s to the console.
 class BufferContext extends Context {
-  final StringBuffer buffer;
-  final void Function() setState;
-
+  /// Constructs a [BufferContext] with given properties.
   BufferContext({
     @required this.buffer,
     @required this.setState,
   });
+
+  /// Buffer stores the lines written to the context.
+  final StringBuffer buffer;
+
+  /// Runs everytime something was written to the buffer.
+  final void Function() setState;
 
   @override
   void writeln([String text]) {

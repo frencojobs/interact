@@ -8,6 +8,23 @@ String _prompt(int x) => '';
 
 /// A progress bar component.
 class Progress extends Component<ProgressState> {
+  /// Constructs a [Progress] component with the default theme.
+  Progress({
+    @required this.length,
+    this.size = 1.0,
+    this.leftPrompt = _prompt,
+    this.rightPrompt = _prompt,
+  }) : theme = Theme.defaultTheme;
+
+  /// Constructs a [Progress] component with the supplied theme.
+  Progress.withTheme({
+    @required this.theme,
+    @required this.length,
+    this.size = 1.0,
+    this.leftPrompt = _prompt,
+    this.rightPrompt = _prompt,
+  });
+
   Context _context;
 
   /// The theme of the component.
@@ -29,24 +46,6 @@ class Progress extends Component<ProgressState> {
   /// The prompt function to be shown on the right side
   /// of the progress bar.
   final String Function(int) rightPrompt;
-
-  /// Constructs a [Progress] component with the default theme.
-  Progress({
-    @required this.length,
-    this.size = 1.0,
-    this.leftPrompt = _prompt,
-    this.rightPrompt = _prompt,
-  }) : theme = Theme.defaultTheme;
-
-  /// Constructs a [Progress] component with the supplied theme.
-  Progress.withTheme({
-    @required this.theme,
-    @required this.length,
-    this.size = 1.0,
-    this.leftPrompt = _prompt,
-    this.rightPrompt = _prompt,
-  });
-
   @override
   _ProgressState createState() => _ProgressState();
 
@@ -62,11 +61,21 @@ class Progress extends Component<ProgressState> {
     return state;
   }
 
+  /// Sets the context to a new one,
+  /// to be used internally by [MultiProgress].
   void setContext(Context c) => _context = c;
 }
 
 /// Handles a progress bar's state.
 class ProgressState {
+  /// Constructs a [ProgressState] with it's all properties.
+  ProgressState({
+    @required this.current,
+    @required this.clear,
+    @required this.increase,
+    @required this.done,
+  });
+
   /// Current progress.
   int current;
 
@@ -79,14 +88,6 @@ class ProgressState {
   /// To be run to indicate that the progress is done,
   /// and the rendering can be wiped from the terminal.
   void Function() Function() done;
-
-  /// Constructs a [ProgressState] with it's all properties.
-  ProgressState({
-    @required this.current,
-    @required this.clear,
-    @required this.increase,
-    @required this.done,
-  });
 }
 
 class _ProgressState extends State<Progress> {

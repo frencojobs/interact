@@ -7,19 +7,6 @@ import 'utils/prompt.dart';
 
 /// A multiple select or checkbox input component.
 class MultiSelect extends Component<List<int>> {
-  /// The theme of the component.
-  final Theme theme;
-
-  /// The prompt to be shown together with the user's input.
-  final String prompt;
-
-  /// The [List] of available [String] options to show to
-  /// the user.
-  final List<String> options;
-
-  /// The default values to indicate which options are checked.
-  final List<bool> defaults;
-
   /// Constructs a [MultiSelect] component with the default theme.
   MultiSelect({
     @required this.prompt,
@@ -34,6 +21,19 @@ class MultiSelect extends Component<List<int>> {
     @required this.theme,
     this.defaults,
   });
+
+  /// The theme of the component.
+  final Theme theme;
+
+  /// The prompt to be shown together with the user's input.
+  final String prompt;
+
+  /// The [List] of available [String] options to show to
+  /// the user.
+  final List<String> options;
+
+  /// The default values to indicate which options are checked.
+  final List<bool> defaults;
 
   @override
   _MultiSelectState createState() => _MultiSelectState();
@@ -56,7 +56,8 @@ class _MultiSelectState extends State<MultiSelect> {
     if (component.defaults != null) {
       if (component.defaults.length != component.options.length) {
         throw Exception(
-          'Default selections have a different length of ${component.defaults.length} '
+          'Default selections have a different length of '
+          '${component.defaults.length} '
           'than options of ${component.options.length}',
         );
       } else {

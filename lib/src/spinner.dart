@@ -10,6 +10,21 @@ String _prompt(bool x) => '';
 
 /// A spinner or a loading indicator component.
 class Spinner extends Component<SpinnerState> {
+  /// Construts a [Spinner] component with the default theme.
+  Spinner({
+    @required this.icon,
+    this.leftPrompt = _prompt,
+    this.rightPrompt = _prompt,
+  }) : theme = Theme.defaultTheme;
+
+  /// Constructs a [Spinner] component with the supplied theme.
+  Spinner.withTheme({
+    @required this.icon,
+    @required this.theme,
+    this.leftPrompt = _prompt,
+    this.rightPrompt = _prompt,
+  });
+
   Context _context;
 
   /// The theme of the component.
@@ -27,21 +42,6 @@ class Spinner extends Component<SpinnerState> {
   /// of the spinning indicator or icon.
   final String Function(bool) rightPrompt;
 
-  /// Construts a [Spinner] component with the default theme.
-  Spinner({
-    @required this.icon,
-    this.leftPrompt = _prompt,
-    this.rightPrompt = _prompt,
-  }) : theme = Theme.defaultTheme;
-
-  /// Constructs a [Spinner] component with the supplied theme.
-  Spinner.withTheme({
-    @required this.icon,
-    @required this.theme,
-    this.leftPrompt = _prompt,
-    this.rightPrompt = _prompt,
-  });
-
   @override
   _SpinnerState createState() => _SpinnerState();
 
@@ -56,16 +56,19 @@ class Spinner extends Component<SpinnerState> {
     return state;
   }
 
+  /// Sets the context to a new one,
+  /// to be used internally by [MultiSpinner].
   void setContext(Context c) => _context = c;
 }
 
 /// Handles a [Spinner]'s state.
 class SpinnerState {
+  /// Constructs a state to manage a [Spinner].
+  SpinnerState({@required this.done});
+
   /// Function to be called to indicate that the
   /// spinner is loaded.
   void Function() Function() done;
-
-  SpinnerState({@required this.done});
 }
 
 class _SpinnerState extends State<Spinner> {

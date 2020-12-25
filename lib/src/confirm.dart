@@ -7,19 +7,6 @@ import 'utils/prompt.dart';
 
 /// A confirm component.
 class Confirm extends Component<bool> {
-  /// The theme of the component.
-  final Theme theme;
-
-  /// The prompt to be shown together with the user's input.
-  final String prompt;
-
-  /// The value to be used as an initial value.
-  final bool defaultValue;
-
-  /// Determines whether to wait for the Enter key after
-  /// the user has responded.
-  final bool waitForNewLine;
-
   /// Constructs a [Confirm] component with the default theme.
   Confirm({
     @required this.prompt,
@@ -34,6 +21,19 @@ class Confirm extends Component<bool> {
     this.defaultValue,
     this.waitForNewLine = false,
   });
+
+  /// The theme of the component.
+  final Theme theme;
+
+  /// The prompt to be shown together with the user's input.
+  final String prompt;
+
+  /// The value to be used as an initial value.
+  final bool defaultValue;
+
+  /// Determines whether to wait for the Enter key after
+  /// the user has responded.
+  final bool waitForNewLine;
 
   @override
   _ConfirmState createState() => _ConfirmState();

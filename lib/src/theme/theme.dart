@@ -1,3 +1,9 @@
+// ignore_for_file: public_member_api_docs
+// ---
+// I can't write docs comments for all of [Theme] properties,
+// it's too much.
+// But I did use expressive names, so it should be good.
+
 import 'package:meta/meta.dart';
 import 'package:tint/tint.dart';
 
@@ -8,6 +14,40 @@ typedef StyleFunction = String Function(String);
 
 /// The theme to be used by components.
 class Theme {
+  /// Constructs a new [Theme] with all of it's properties.
+  const Theme({
+    @required this.inputPrefix,
+    @required this.inputSuffix,
+    @required this.successPrefix,
+    @required this.successSuffix,
+    @required this.errorPrefix,
+    @required this.hiddenPrefix,
+    @required this.messageStyle,
+    @required this.errorStyle,
+    @required this.hintStyle,
+    @required this.valueStyle,
+    @required this.defaultStyle,
+    @required this.activeItemPrefix,
+    @required this.inactiveItemPrefix,
+    @required this.activeItemStyle,
+    @required this.inactiveItemStyle,
+    @required this.checkedItemPrefix,
+    @required this.uncheckedItemPrefix,
+    @required this.pickedItemPrefix,
+    @required this.unpickedItemPrefix,
+    @required this.showActiveCursor,
+    @required this.progressPrefix,
+    @required this.progressSuffix,
+    @required this.emptyProgress,
+    @required this.filledProgress,
+    @required this.leadingProgress,
+    @required this.emptyProgressStyle,
+    @required this.filledProgressStyle,
+    @required this.leadingProgressStyle,
+    @required this.spinner,
+    @required this.spinningInterval,
+  });
+
   final String inputPrefix;
   final String inputSuffix;
   final String successPrefix;
@@ -44,40 +84,6 @@ class Theme {
 
   final String spinner;
   final int spinningInterval;
-
-  /// Constructs a new [Theme] with all of it's properties.
-  const Theme({
-    @required this.inputPrefix,
-    @required this.inputSuffix,
-    @required this.successPrefix,
-    @required this.successSuffix,
-    @required this.errorPrefix,
-    @required this.hiddenPrefix,
-    @required this.messageStyle,
-    @required this.errorStyle,
-    @required this.hintStyle,
-    @required this.valueStyle,
-    @required this.defaultStyle,
-    @required this.activeItemPrefix,
-    @required this.inactiveItemPrefix,
-    @required this.activeItemStyle,
-    @required this.inactiveItemStyle,
-    @required this.checkedItemPrefix,
-    @required this.uncheckedItemPrefix,
-    @required this.pickedItemPrefix,
-    @required this.unpickedItemPrefix,
-    @required this.showActiveCursor,
-    @required this.progressPrefix,
-    @required this.progressSuffix,
-    @required this.emptyProgress,
-    @required this.filledProgress,
-    @required this.leadingProgress,
-    @required this.emptyProgressStyle,
-    @required this.filledProgressStyle,
-    @required this.leadingProgressStyle,
-    @required this.spinner,
-    @required this.spinningInterval,
-  });
 
   /// Copy current theme with new properties and create a
   /// new [Theme] from it.

@@ -10,7 +10,16 @@ part of interact.framework;
 /// Generic [T] is the return type of the [Component] which
 /// will be returned from the `interact()` function.
 abstract class Component<T extends dynamic> {
+  /// Creates a [State] for current component,
+  /// inspired by Flutter's [StatefulWidget].
   State createState();
+
+  /// Disposes current state, to make the [Context] null and unusable
+  /// after the rendering is completely finished.
+  ///
+  /// Exposed with the purpose to be overriden by [Spinner] and [Progress]
+  /// components which dispose the context only when the `done` function
+  /// is called.
   void disposeState(State state) => state.dispose();
 
   /// Pipes the state after running `createState` in case of
