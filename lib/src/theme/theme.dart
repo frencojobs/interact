@@ -44,7 +44,7 @@ class Theme {
     @required this.emptyProgressStyle,
     @required this.filledProgressStyle,
     @required this.leadingProgressStyle,
-    @required this.spinner,
+    @required this.spinners,
     @required this.spinningInterval,
   });
 
@@ -82,7 +82,7 @@ class Theme {
   final StyleFunction filledProgressStyle;
   final StyleFunction leadingProgressStyle;
 
-  final String spinner;
+  final List<String> spinners;
   final int spinningInterval;
 
   /// Copy current theme with new properties and create a
@@ -116,7 +116,7 @@ class Theme {
     StyleFunction emptyProgressStyle,
     StyleFunction filledProgressStyle,
     StyleFunction leadingProgressStyle,
-    String spinner,
+    List<String> spinners,
     int spinningInterval,
   }) {
     return Theme(
@@ -148,7 +148,7 @@ class Theme {
       emptyProgressStyle: emptyProgressStyle ?? this.emptyProgressStyle,
       filledProgressStyle: filledProgressStyle ?? this.filledProgressStyle,
       leadingProgressStyle: leadingProgressStyle ?? this.leadingProgressStyle,
-      spinner: spinner ?? this.spinner,
+      spinners: spinners ?? this.spinners,
       spinningInterval: spinningInterval ?? this.spinningInterval,
     );
   }
@@ -186,7 +186,7 @@ class Theme {
     emptyProgressStyle: (x) => x,
     filledProgressStyle: (x) => x,
     leadingProgressStyle: (x) => x,
-    spinner: '⠁⠂⠄⡀⢀⠠⠐⠈',
+    spinners: '⠁⠂⠄⡀⢀⠠⠐⠈'.split(''),
     spinningInterval: 80,
   );
 
@@ -220,7 +220,7 @@ class Theme {
     emptyProgressStyle: (x) => x,
     filledProgressStyle: (x) => x,
     leadingProgressStyle: (x) => x,
-    spinner: '⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏',
+    spinners: '⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'.split(''),
     spinningInterval: 80,
   );
 }

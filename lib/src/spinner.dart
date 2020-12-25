@@ -98,7 +98,7 @@ class _SpinnerState extends State<Spinner> {
     if (done) {
       line.write(component.icon);
     } else {
-      line.write(component.theme.spinner[index]);
+      line.write(component.theme.spinners[index]);
     }
     line.write(' ');
     line.write(component.rightPrompt(done));
@@ -114,7 +114,7 @@ class _SpinnerState extends State<Spinner> {
       ),
       (timer) {
         setState(() {
-          index = (index + 1) % component.theme.spinner.length;
+          index = (index + 1) % component.theme.spinners.length;
         });
       },
     );
