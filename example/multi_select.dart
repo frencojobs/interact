@@ -16,7 +16,8 @@ void main() {
     stdout.writeln("Omg you're such a musical fan!");
   } else {
     stdout.writeln(
-      '${x.map((i) => musicals[i]).join(' and ')} ${x.length == 1 ? 'is' : 'are'} the best!',
+      '${x.map((i) => musicals[i]).join(' and ')} '
+      '${x.length == 1 ? 'is' : 'are'} the best!',
     );
   }
 }

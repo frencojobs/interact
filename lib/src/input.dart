@@ -7,13 +7,32 @@ import 'utils/prompt.dart';
 /// The error message to be thrown from the [Input] component's
 /// validator when there is an error.
 class ValidationError {
+  /// Constructs a [ValidationError] with given message.
+  ValidationError(this.message);
+
   /// The error message.
   final String message;
-  ValidationError(this.message);
 }
 
 /// An input component.
 class Input extends Component<String> {
+  /// Constructs an [Input] component with the default theme.
+  Input({
+    @required this.prompt,
+    this.validator,
+    this.initialText = '',
+    this.defaultValue,
+  }) : theme = Theme.defaultTheme;
+
+  /// Constructs an [Input] component with the supplied theme.
+  Input.withTheme({
+    @required this.prompt,
+    @required this.theme,
+    this.validator,
+    this.initialText = '',
+    this.defaultValue,
+  });
+
   /// The theme for the component.
   final Theme theme;
 
@@ -32,23 +51,6 @@ class Input extends Component<String> {
   /// instead of returning `true`, the error will be shown and
   /// a new input will be asked.
   final bool Function(String) validator;
-
-  /// Constructs an [Input] component with the default theme.
-  Input({
-    @required this.prompt,
-    this.validator,
-    this.initialText = '',
-    this.defaultValue,
-  }) : theme = Theme.defaultTheme;
-
-  /// Constructs an [Input] component with the supplied theme.
-  Input.withTheme({
-    @required this.prompt,
-    @required this.theme,
-    this.validator,
-    this.initialText = '',
-    this.defaultValue,
-  });
 
   @override
   _InputState createState() => _InputState();
