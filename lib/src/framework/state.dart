@@ -2,20 +2,38 @@ part of interact.framework;
 
 /// Provides the structure and `setState` function.
 abstract class State<T extends Component> {
-  Context _context;
+  Context? _context;
 
   /// The context of the state.
-  Context get context => _context;
+  Context get context {
+    if (_context == null) {
+      throw Exception(
+        "The state's context is already disposed"
+        ' '
+        'or is not created initially.',
+      );
+    }
+    return _context!;
+  }
 
   /// Changes the context to a new one, not to be used in normal components
   /// except [MultiSpinner] and [MultiProgress] components which requires
   /// custom context overriding.
   void setContext<U extends Context>(U c) => _context = c;
 
-  T _component;
+  T? _component;
 
   /// The component that is using this state.
-  T get component => _component;
+  T get component {
+    if (_component == null) {
+      throw Exception(
+        'The state is not bind to a component'
+        ' '
+        'or is already disposed.',
+      );
+    }
+    return _component!;
+  }
 
   /// Runs the [fn] function, erases all lines from the previous
   /// render, and increases the render count after rendering a new state.

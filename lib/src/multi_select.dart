@@ -1,5 +1,4 @@
 import 'package:dart_console/dart_console.dart';
-import 'package:meta/meta.dart';
 
 import 'framework/framework.dart';
 import 'theme/theme.dart';
@@ -9,16 +8,16 @@ import 'utils/prompt.dart';
 class MultiSelect extends Component<List<int>> {
   /// Constructs a [MultiSelect] component with the default theme.
   MultiSelect({
-    @required this.prompt,
-    @required this.options,
+    required this.prompt,
+    required this.options,
     this.defaults,
   }) : theme = Theme.defaultTheme;
 
   /// Constructs a [MultiSelect] component with the supplied theme.
   MultiSelect.withTheme({
-    @required this.prompt,
-    @required this.options,
-    @required this.theme,
+    required this.prompt,
+    required this.options,
+    required this.theme,
     this.defaults,
   });
 
@@ -33,15 +32,15 @@ class MultiSelect extends Component<List<int>> {
   final List<String> options;
 
   /// The default values to indicate which options are checked.
-  final List<bool> defaults;
+  final List<bool>? defaults;
 
   @override
   _MultiSelectState createState() => _MultiSelectState();
 }
 
 class _MultiSelectState extends State<MultiSelect> {
-  List<int> selection;
-  int index;
+  late List<int> selection;
+  late int index;
 
   @override
   void init() {
@@ -54,15 +53,15 @@ class _MultiSelectState extends State<MultiSelect> {
     }
 
     if (component.defaults != null) {
-      if (component.defaults.length != component.options.length) {
+      if (component.defaults!.length != component.options.length) {
         throw Exception(
           'Default selections have a different length of '
-          '${component.defaults.length} '
+          '${component.defaults!.length} '
           'than options of ${component.options.length}',
         );
       } else {
         selection.addAll(
-          component.defaults
+          component.defaults!
               .asMap()
               .entries
               .where((entry) => entry.value)
@@ -90,8 +89,8 @@ class _MultiSelectState extends State<MultiSelect> {
       message: component.prompt,
       value: values,
     ));
-    context.showCursor();
 
+    context.showCursor();
     super.dispose();
   }
 
@@ -146,7 +145,6 @@ class _MultiSelectState extends State<MultiSelect> {
             break;
           case ControlCharacter.enter:
             return selection;
-            break;
           default:
             break;
         }

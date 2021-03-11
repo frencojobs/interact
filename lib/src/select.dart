@@ -1,5 +1,4 @@
 import 'package:dart_console/dart_console.dart';
-import 'package:meta/meta.dart';
 
 import 'framework/framework.dart';
 import 'theme/theme.dart';
@@ -9,16 +8,16 @@ import 'utils/prompt.dart';
 class Select extends Component<int> {
   /// Constructs a [Select] component with the default theme.
   Select({
-    @required this.prompt,
-    @required this.options,
+    required this.prompt,
+    required this.options,
     this.initialIndex = 0,
   }) : theme = Theme.defaultTheme;
 
   /// Constructs a [Select] component with the supplied theme.
   Select.withTheme({
-    @required this.prompt,
-    @required this.options,
-    @required this.theme,
+    required this.prompt,
+    required this.options,
+    required this.theme,
     this.initialIndex = 0,
   });
 
@@ -114,7 +113,6 @@ class _SelectState extends State<Select> {
           break;
         case ControlCharacter.enter:
           return index;
-          break;
         default:
           break;
       }

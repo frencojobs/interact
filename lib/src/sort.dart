@@ -1,5 +1,4 @@
 import 'package:dart_console/dart_console.dart';
-import 'package:meta/meta.dart';
 
 import 'framework/framework.dart';
 import 'theme/theme.dart';
@@ -9,16 +8,16 @@ import 'utils/prompt.dart';
 class Sort extends Component<List<String>> {
   /// Constructs a [Sort] component with the default theme.
   Sort({
-    @required this.prompt,
-    @required this.options,
+    required this.prompt,
+    required this.options,
     this.showOutput = true,
   }) : theme = Theme.defaultTheme;
 
   /// Constructs a [Sort] component with the default theme.
   Sort.withTheme({
-    @required this.prompt,
-    @required this.options,
-    @required this.theme,
+    required this.prompt,
+    required this.options,
+    required this.theme,
     this.showOutput = true,
   });
 
@@ -41,9 +40,9 @@ class Sort extends Component<List<String>> {
 }
 
 class _SortState extends State<Sort> {
-  int index;
-  int picked;
-  List<int> options;
+  late int index;
+  int? picked;
+  late List<int> options;
 
   @override
   void init() {
@@ -134,7 +133,6 @@ class _SortState extends State<Sort> {
             break;
           case ControlCharacter.enter:
             return options.map((x) => component.options[x]).toList();
-            break;
           default:
             break;
         }
@@ -149,19 +147,23 @@ class _SortState extends State<Sort> {
   }
 
   void _up() {
-    final prev = options.indexOf(picked);
-    final next = (prev - 1) % options.length;
+    if (picked != null) {
+      final prev = options.indexOf(picked!);
+      final next = (prev - 1) % options.length;
 
-    options.remove(picked);
-    options.insert(next, picked);
+      options.remove(picked);
+      options.insert(next, picked!);
+    }
   }
 
   void _down() {
-    final prev = options.indexOf(picked);
-    final next = (prev + 1) % options.length;
+    if (picked != null) {
+      final prev = options.indexOf(picked!);
+      final next = (prev + 1) % options.length;
 
-    options.remove(picked);
-    options.insert(next, picked);
+      options.remove(picked);
+      options.insert(next, picked!);
+    }
   }
 
   void _toggle(int n) {

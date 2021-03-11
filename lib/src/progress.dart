@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:tint/tint.dart';
 
 import 'framework/framework.dart';
@@ -10,7 +9,7 @@ String _prompt(int x) => '';
 class Progress extends Component<ProgressState> {
   /// Constructs a [Progress] component with the default theme.
   Progress({
-    @required this.length,
+    required this.length,
     this.size = 1.0,
     this.leftPrompt = _prompt,
     this.rightPrompt = _prompt,
@@ -18,14 +17,14 @@ class Progress extends Component<ProgressState> {
 
   /// Constructs a [Progress] component with the supplied theme.
   Progress.withTheme({
-    @required this.theme,
-    @required this.length,
+    required this.theme,
+    required this.length,
     this.size = 1.0,
     this.leftPrompt = _prompt,
     this.rightPrompt = _prompt,
   });
 
-  Context _context;
+  Context? _context;
 
   /// The theme of the component.
   final Theme theme;
@@ -55,7 +54,7 @@ class Progress extends Component<ProgressState> {
   @override
   State pipeState(State state) {
     if (_context != null) {
-      state.setContext(_context);
+      state.setContext(_context!);
     }
 
     return state;
@@ -70,10 +69,10 @@ class Progress extends Component<ProgressState> {
 class ProgressState {
   /// Constructs a [ProgressState] with it's all properties.
   ProgressState({
-    @required this.current,
-    @required this.clear,
-    @required this.increase,
-    @required this.done,
+    required this.current,
+    required this.clear,
+    required this.increase,
+    required this.done,
   });
 
   /// Current progress.
@@ -91,8 +90,8 @@ class ProgressState {
 }
 
 class _ProgressState extends State<Progress> {
-  int current;
-  bool done;
+  late int current;
+  late bool done;
 
   @override
   void init() {
