@@ -1,7 +1,5 @@
 import 'dart:async' show Timer;
 
-import 'package:meta/meta.dart';
-
 import 'package:interact/interact.dart';
 import 'framework/framework.dart';
 import 'theme/theme.dart';
@@ -12,20 +10,20 @@ String _prompt(bool x) => '';
 class Spinner extends Component<SpinnerState> {
   /// Construts a [Spinner] component with the default theme.
   Spinner({
-    @required this.icon,
+    required this.icon,
     this.leftPrompt = _prompt,
     this.rightPrompt = _prompt,
   }) : theme = Theme.defaultTheme;
 
   /// Constructs a [Spinner] component with the supplied theme.
   Spinner.withTheme({
-    @required this.icon,
-    @required this.theme,
+    required this.icon,
+    required this.theme,
     this.leftPrompt = _prompt,
     this.rightPrompt = _prompt,
   });
 
-  Context _context;
+  Context? _context;
 
   /// The theme of the component.
   final Theme theme;
@@ -51,7 +49,7 @@ class Spinner extends Component<SpinnerState> {
   @override
   State pipeState(State state) {
     if (_context != null) {
-      state.setContext(_context);
+      state.setContext(_context!);
     }
     return state;
   }
@@ -64,7 +62,7 @@ class Spinner extends Component<SpinnerState> {
 /// Handles a [Spinner]'s state.
 class SpinnerState {
   /// Constructs a state to manage a [Spinner].
-  SpinnerState({@required this.done});
+  SpinnerState({required this.done});
 
   /// Function to be called to indicate that the
   /// spinner is loaded.
@@ -72,8 +70,8 @@ class SpinnerState {
 }
 
 class _SpinnerState extends State<Spinner> {
-  bool done;
-  int index;
+  late bool done;
+  late int index;
 
   @override
   void init() {

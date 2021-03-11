@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'framework/framework.dart';
 import 'theme/theme.dart';
 import 'utils/prompt.dart';
@@ -18,7 +16,7 @@ class ValidationError {
 class Input extends Component<String> {
   /// Constructs an [Input] component with the default theme.
   Input({
-    @required this.prompt,
+    required this.prompt,
     this.validator,
     this.initialText = '',
     this.defaultValue,
@@ -26,8 +24,8 @@ class Input extends Component<String> {
 
   /// Constructs an [Input] component with the supplied theme.
   Input.withTheme({
-    @required this.prompt,
-    @required this.theme,
+    required this.prompt,
+    required this.theme,
     this.validator,
     this.initialText = '',
     this.defaultValue,
@@ -44,21 +42,21 @@ class Input extends Component<String> {
 
   /// The value to be hinted in the [prompt] and will be used
   /// if the user's input is empty.
-  final String defaultValue;
+  final String? defaultValue;
 
   /// The function that runs with the value after the user has
   /// entered the input. If the function throw a [ValidationError]
   /// instead of returning `true`, the error will be shown and
   /// a new input will be asked.
-  final bool Function(String) validator;
+  final bool Function(String)? validator;
 
   @override
   _InputState createState() => _InputState();
 }
 
 class _InputState extends State<Input> {
-  String value;
-  String error;
+  String? value;
+  String? error;
 
   @override
   void init() {
@@ -68,11 +66,13 @@ class _InputState extends State<Input> {
 
   @override
   void dispose() {
-    context.writeln(promptSuccess(
-      theme: component.theme,
-      message: component.prompt,
-      value: value,
-    ));
+    if (value != null) {
+      context.writeln(promptSuccess(
+        theme: component.theme,
+        message: component.prompt,
+        value: value!,
+      ));
+    }
     super.dispose();
   }
 
@@ -81,7 +81,7 @@ class _InputState extends State<Input> {
     if (error != null) {
       context.writeln(promptError(
         theme: component.theme,
-        message: error,
+        message: error!,
       ));
     }
   }
@@ -96,12 +96,12 @@ class _InputState extends State<Input> {
       ));
       final input = context.readLine(initialText: component.initialText);
       final line = input.isEmpty && component.defaultValue != null
-          ? component.defaultValue
+          ? component.defaultValue!
           : input;
 
       if (component.validator != null) {
         try {
-          component.validator(line);
+          component.validator!(line);
         } on ValidationError catch (e) {
           setState(() {
             error = e.message;
@@ -114,7 +114,7 @@ class _InputState extends State<Input> {
         value = line;
       });
 
-      return value;
+      return value!;
     }
   }
 }

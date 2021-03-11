@@ -52,7 +52,7 @@ class Context {
 
   /// Increases the number of lines written for the current render,
   /// and writes a line to the the console.
-  void writeln([String text]) {
+  void writeln([String? text]) {
     increaseLinesCount();
     _console.writeLine(text);
   }
@@ -85,8 +85,8 @@ class Context {
     var buffer = initialText;
     var index = buffer.length;
 
-    final screenRow = _console.cursorPosition.row;
-    final screenColOffset = _console.cursorPosition.col;
+    final screenRow = _console.cursorPosition?.row ?? 0;
+    final screenColOffset = _console.cursorPosition?.col ?? 0;
     final bufferMaxLength = _console.windowWidth - screenColOffset - 3;
 
     if (buffer.isNotEmpty && !noRender) {
@@ -189,8 +189,8 @@ class Context {
 class BufferContext extends Context {
   /// Constructs a [BufferContext] with given properties.
   BufferContext({
-    @required this.buffer,
-    @required this.setState,
+    required this.buffer,
+    required this.setState,
   });
 
   /// Buffer stores the lines written to the context.
@@ -200,7 +200,7 @@ class BufferContext extends Context {
   final void Function() setState;
 
   @override
-  void writeln([String text]) {
+  void writeln([String? text]) {
     buffer.clear();
     buffer.write(text);
     setState();

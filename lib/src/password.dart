@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'framework/framework.dart';
 import 'theme/theme.dart';
 import 'utils/prompt.dart';
@@ -8,7 +6,7 @@ import 'utils/prompt.dart';
 class Password extends Component<String> {
   /// Constructs a [Password] component with the default theme.
   Password({
-    @required this.prompt,
+    required this.prompt,
     this.confirmation = false,
     this.confirmPrompt,
     this.confirmError,
@@ -16,8 +14,8 @@ class Password extends Component<String> {
 
   /// Constructs a [Password] component with the supplied theme.
   Password.withTheme({
-    @required this.theme,
-    @required this.prompt,
+    required this.theme,
+    required this.prompt,
     this.confirmation = false,
     this.confirmPrompt,
     this.confirmError,
@@ -34,18 +32,18 @@ class Password extends Component<String> {
 
   /// The prompt to be shown when asking for the password
   /// againg to confirm.
-  final String confirmPrompt;
+  final String? confirmPrompt;
 
   /// The error message to be shown if the repeated password
   /// did not match the initial password.
-  final String confirmError;
+  final String? confirmError;
 
   @override
   _PasswordState createState() => _PasswordState();
 }
 
 class _PasswordState extends State<Password> {
-  bool hasError;
+  late bool hasError;
 
   @override
   void init() {

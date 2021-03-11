@@ -1,5 +1,4 @@
 import 'package:dart_console/dart_console.dart';
-import 'package:meta/meta.dart';
 
 import 'framework/framework.dart';
 import 'theme/theme.dart';
@@ -9,15 +8,15 @@ import 'utils/prompt.dart';
 class Confirm extends Component<bool> {
   /// Constructs a [Confirm] component with the default theme.
   Confirm({
-    @required this.prompt,
+    required this.prompt,
     this.defaultValue,
     this.waitForNewLine = false,
   }) : theme = Theme.defaultTheme;
 
   /// Constructs a [Confirm] component with the supplied theme.
   Confirm.withTheme({
-    @required this.theme,
-    @required this.prompt,
+    required this.theme,
+    required this.prompt,
     this.defaultValue,
     this.waitForNewLine = false,
   });
@@ -29,7 +28,7 @@ class Confirm extends Component<bool> {
   final String prompt;
 
   /// The value to be used as an initial value.
-  final bool defaultValue;
+  final bool? defaultValue;
 
   /// Determines whether to wait for the Enter key after
   /// the user has responded.
@@ -40,12 +39,14 @@ class Confirm extends Component<bool> {
 }
 
 class _ConfirmState extends State<Confirm> {
-  bool answer;
+  bool? answer;
 
   @override
   void init() {
     super.init();
-    answer = component.defaultValue;
+    if (component.defaultValue != null) {
+      answer = component.defaultValue;
+    }
     context.hideCursor();
   }
 
@@ -54,7 +55,7 @@ class _ConfirmState extends State<Confirm> {
     context.writeln(promptSuccess(
       theme: component.theme,
       message: component.prompt,
-      value: answer ? 'yes' : 'no',
+      value: answer! ? 'yes' : 'no',
     ));
     context.showCursor();
 
@@ -70,7 +71,7 @@ class _ConfirmState extends State<Confirm> {
       hint: 'y/n',
     ));
     if (answer != null) {
-      line.write(component.theme.defaultStyle(answer ? 'yes' : 'no'));
+      line.write(component.theme.defaultStyle(answer! ? 'yes' : 'no'));
     }
     context.writeln(line.toString());
   }
@@ -84,7 +85,7 @@ class _ConfirmState extends State<Confirm> {
         if (key.controlChar == ControlCharacter.enter &&
             answer != null &&
             component.waitForNewLine) {
-          return answer;
+          return answer!;
         }
       } else {
         switch (key.char) {
@@ -94,7 +95,7 @@ class _ConfirmState extends State<Confirm> {
               answer = true;
             });
             if (!component.waitForNewLine) {
-              return answer;
+              return answer!;
             }
             break;
           case 'n':
@@ -103,7 +104,7 @@ class _ConfirmState extends State<Confirm> {
               answer = false;
             });
             if (!component.waitForNewLine) {
-              return answer;
+              return answer!;
             }
             break;
           default:

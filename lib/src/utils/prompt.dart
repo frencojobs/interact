@@ -1,12 +1,10 @@
-import 'package:meta/meta.dart';
-
 import '../theme/theme.dart';
 
 /// Generates a formatted input message to prompt.
 String promptInput({
-  @required Theme theme,
-  @required String message,
-  String hint,
+  required Theme theme,
+  required String message,
+  String? hint,
 }) {
   final buffer = StringBuffer();
 
@@ -25,9 +23,9 @@ String promptInput({
 /// Generates a success prompt, a message to indicates
 /// the interaction is successfully finished.
 String promptSuccess({
-  @required Theme theme,
-  @required String message,
-  @required String value,
+  required Theme theme,
+  required String message,
+  required String value,
 }) {
   final buffer = StringBuffer();
 
@@ -41,8 +39,8 @@ String promptSuccess({
 
 /// Generates a message to use as an error prompt.
 String promptError({
-  @required Theme theme,
-  @required String message,
+  required Theme theme,
+  required String message,
 }) {
   final buffer = StringBuffer();
 
