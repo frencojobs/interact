@@ -48,7 +48,7 @@ It will result in something like this,
 
 ## Installation
 
-Install the latest version of tint as a dependency as shown in [pub.dev](https://pub.dev/packages/interact).
+Install the latest version of interact as a dependency as shown in [pub.dev](https://pub.dev/packages/interact).
 
 <br>
 

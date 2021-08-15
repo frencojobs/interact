@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Fix a typo in the documentation
+
 ## 2.0.0
 
 - Migrate to null safety
