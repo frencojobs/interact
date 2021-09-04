@@ -1,6 +1,6 @@
 name: interact
 description: A collection of customizable interactive command-line components.
-version: 2.0.1
+version: 2.1.0
 repository: https://github.com/frencojobs/interact
 
 environment:

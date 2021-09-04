@@ -84,7 +84,7 @@ class _ConfirmState extends State<Confirm> {
       if (key.isControl) {
         if (key.controlChar == ControlCharacter.enter &&
             answer != null &&
-            component.waitForNewLine) {
+            (component.waitForNewLine || component.defaultValue != null)) {
           return answer!;
         }
       } else {

@@ -19,6 +19,7 @@ A collection of customizable interactive command-line components.
     - [Spinner and MultiSpinner Components](#spinner-and-multispinner-components)
     - [Progress and MultiProgress Components](#progress-and-multiprogress-components)
   - [Customizing Themes](#customizing-themes)
+  - [Handling Exceptions](#handling-exceptions)
 - [Acknowledgement](#acknowledgement)
 - [License](#license)
 
@@ -264,6 +265,22 @@ Theme customTheme = Theme.colorfulTheme.copyWith(
   activeItemPrefix: '👉'
   activeItemStyle: (x) => x.yellow().underline(),
 );
+```
+
+Technically, you can also override `Theme.defaultTheme` as a shortcut.
+
+### Handling Exceptions
+
+If your program throw exceptions and exit midway, interact's components won't be able to finish their tasks and gracefully quit therefore causing certain problems like cursors not showing up, terminal colors got modified etc. To fix these problems you should always try to catch exceptions and reset to terminal defaults using `reset` function.
+
+```dart
+try {
+  Spinner(icon: '🚨').interact();
+  throw Exception(); // spinner couldn't finished
+} catch (e) {
+  reset(); // Reset everything to terminal defaults
+  rethrow;
+}
 ```
 
 <br>

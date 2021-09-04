@@ -8,6 +8,12 @@ final _defaultConsole = Console();
 /// amount of lines used by a specific render, so that the [State] can
 /// clear old lines and render new stuffs automatically.
 class Context {
+  /// Resets the Console.
+  static void reset() {
+    _defaultConsole.showCursor();
+    _defaultConsole.resetColorAttributes();
+  }
+
   final _console = _defaultConsole;
 
   int _renderCount = 0;

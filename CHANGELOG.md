@@ -1,3 +1,9 @@
+## 2.1.0
+
+- Make confirm components enter-able if `defaultValue` is supplied
+- Add `reset` function which supports exception handling
+- Allow overriding `Theme.defaultTheme` directly
+
 ## 2.0.1
 
 - Fix a typo in the documentation

@@ -153,7 +153,7 @@ class Theme {
   }
 
   /// An alias to [colorfulTheme].
-  static final defaultTheme = colorfulTheme;
+  static var defaultTheme = colorfulTheme;
 
   /// A very basic theme without colors.
   static final basicTheme = Theme(
