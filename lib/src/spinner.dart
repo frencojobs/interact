@@ -1,8 +1,9 @@
-import 'dart:async' show Timer;
+import 'dart:async' show Timer, StreamSubscription;
+import 'dart:io' show ProcessSignal;
 
-import 'package:interact/interact.dart';
 import 'framework/framework.dart';
 import 'theme/theme.dart';
+import 'utils/utils.dart';
 
 String _prompt(bool x) => '';
 
@@ -72,12 +73,14 @@ class SpinnerState {
 class _SpinnerState extends State<Spinner> {
   late bool done;
   late int index;
+  late StreamSubscription<ProcessSignal> sigint;
 
   @override
   void init() {
     super.init();
     done = false;
     index = 0;
+    sigint = handleSigint();
     context.hideCursor();
   }
 
@@ -121,6 +124,7 @@ class _SpinnerState extends State<Spinner> {
       done: () {
         setState(() {
           done = true;
+          sigint.cancel();
         });
         timer.cancel();
         if (component._context != null) {
