@@ -178,6 +178,7 @@ class Context {
 
   Key _handleKey(Key key) {
     if (key.isControl && key.controlChar == ControlCharacter.ctrlC) {
+      reset();
       exit(1);
     }
     return key;
