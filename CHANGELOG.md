@@ -1,3 +1,8 @@
+## 2.1.1
+
+- Call `reset` on Ctrl+C forced exits
+- Add sigint handlers to components that don't read keys (spinners & progress)
+
 ## 2.1.0
 
 - Make confirm components enter-able if `defaultValue` is supplied

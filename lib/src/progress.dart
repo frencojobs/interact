@@ -1,7 +1,11 @@
+import 'dart:async' show StreamSubscription;
+import 'dart:io' show ProcessSignal;
+
 import 'package:tint/tint.dart';
 
 import 'framework/framework.dart';
 import 'theme/theme.dart';
+import 'utils/utils.dart';
 
 String _prompt(int x) => '';
 
@@ -92,12 +96,14 @@ class ProgressState {
 class _ProgressState extends State<Progress> {
   late int current;
   late bool done;
+  late StreamSubscription<ProcessSignal> sigint;
 
   @override
   void init() {
     super.init();
     current = 0;
     done = false;
+    sigint = handleSigint();
     context.hideCursor();
   }
 
@@ -151,6 +157,7 @@ class _ProgressState extends State<Progress> {
       done: () {
         setState(() {
           done = true;
+          sigint.cancel();
         });
 
         if (component._context != null) {
@@ -175,8 +182,8 @@ class _ProgressState extends State<Progress> {
     final l = filled == 0
         ? ''
         : filled == length
-            ? theme.filledProgressStyle(theme.filledProgress)
-            : theme.leadingProgressStyle(theme.leadingProgress);
+        ? theme.filledProgressStyle(theme.filledProgress)
+        : theme.leadingProgressStyle(theme.leadingProgress);
     final e = theme
         .emptyProgressStyle(''.padRight(length - filled, theme.emptyProgress));
 
