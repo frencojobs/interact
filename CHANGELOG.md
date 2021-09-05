@@ -1,3 +1,7 @@
+## 2.1.1
+
+- Call `reset` on Ctrl+C forced exits
+
 ## 2.1.0
 
 - Make confirm components enter-able if `defaultValue` is supplied
