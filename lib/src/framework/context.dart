@@ -167,11 +167,13 @@ class Context {
       }
 
       if (!noRender) {
+        _console.hideCursor(); // Prevents the cursor jumping being seen
         _console.cursorPosition = Coordinate(screenRow, screenColOffset);
         _console.eraseCursorToEnd();
         write(buffer);
         _console.cursorPosition =
             Coordinate(screenRow, screenColOffset + index);
+        _console.showCursor();
       }
     }
   }
