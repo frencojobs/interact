@@ -15,6 +15,7 @@ A collection of customizable interactive command-line components.
     - [Password Component](#password-component)
     - [Select Component](#select-component)
     - [MultiSelect Component](#multiselect-component)
+    - [GridSelect Component](#gridselect-component)
     - [Sort Component](#sort-component)
     - [Spinner and MultiSpinner Components](#spinner-and-multispinner-components)
     - [Progress and MultiProgress Components](#progress-and-multiprogress-components)
@@ -140,6 +141,23 @@ final answers = MultiSelect(
   prompt: 'Let me know your answers',
   options: ['A', 'B', 'C'],
   defaults: [false, true, false], // optional, will be all false by default
+).interact();
+```
+
+<br>
+
+#### GridSelect Component
+
+A grid-select component is similar to a multi-selet component and should be used for larger selection lists. Similarly, the user can check multiple options using the <kbd>SpaceBar</kbd> and the component will return a list of selected indexes.
+
+```dart
+final answers = GridSelect(
+  prompt: 'Let me know your answers',
+  options: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
+            'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+  defaults: [false, true, false, true, false, true, false, true, false, true, 
+            false, true, false, true, false, true, false, true, false, true, 
+            false, true, false, true, false, true], // optional, will be all false by default
 ).interact();
 ```
 

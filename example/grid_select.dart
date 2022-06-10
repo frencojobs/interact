@@ -70,7 +70,7 @@ void main() {
     'Avengers: Infinity War',
     'Aliens',
     'American Beauty',
-    'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb',
+    'Dr. Strangelove',
     'The Dark Knight Rises',
     'Spider-Man: Into the Spider-Verse',
     'Joker',
