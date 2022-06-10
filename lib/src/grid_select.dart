@@ -96,12 +96,13 @@ class _GridSelectState extends State<GridSelect> {
   @override
   void render() {
     final columns = _columns();
-    for (var i = 0; i < component.options.length - 1; i += columns) {
+    for (var i = 0; i < component.options.length; i += columns) {
       final line = StringBuffer();
       for (var j = 0; j < columns; j++) {
         final ij = i + j;
-        final option = component.options[ij];
+        if (ij > component.options.length - 1) break;
 
+        final option = component.options[ij];
         if (component.theme.showActiveCursor) {
           if (ij == index) {
             line.write(component.theme.activeItemPrefix);
