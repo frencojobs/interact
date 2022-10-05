@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 import 'package:dart_console/dart_console.dart';
+import 'package:interact/src/utils/utils.dart';
 
 import 'framework/framework.dart';
 import 'theme/theme.dart';
@@ -95,7 +96,7 @@ class _GridSelectState extends State<GridSelect> {
 
   @override
   void render() {
-    final columns = _columns();
+    final columns = getColumns(maxOptionLength, component.options.length);
     for (var i = 0; i < component.options.length; i += columns) {
       final line = StringBuffer();
       for (var j = 0; j < columns; j++) {
@@ -103,28 +104,21 @@ class _GridSelectState extends State<GridSelect> {
         if (ij > component.options.length - 1) break;
 
         final option = component.options[ij];
+        final isActive = ij == index;
+        final prefix = isActive ? component.theme.activeItemPrefix : component.theme.inactiveItemPrefix;
+        final style = isActive ? component.theme.activeItemStyle(option) : component.theme.inactiveItemStyle(option);
+        final selected =
+            selection.contains(ij) ? component.theme.checkedItemPrefix : component.theme.uncheckedItemPrefix;
+
         if (component.theme.showActiveCursor) {
-          if (ij == index) {
-            line.write(component.theme.activeItemPrefix);
-          } else {
-            line.write(component.theme.inactiveItemPrefix);
-          }
+          line.write(prefix);
           line.write(' ');
         }
 
         line.write(' ');
-        if (selection.contains(ij)) {
-          line.write(component.theme.checkedItemPrefix);
-        } else {
-          line.write(component.theme.uncheckedItemPrefix);
-        }
-
+        line.write(selected);
         line.write(' ');
-        if (ij == index) {
-          line.write(component.theme.activeItemStyle(option));
-        } else {
-          line.write(component.theme.inactiveItemStyle(option));
-        }
+        line.write(style);
 
         final fill = maxOptionLength - option.length;
         for (var i = fill; i >= 1; i--) {
@@ -141,7 +135,7 @@ class _GridSelectState extends State<GridSelect> {
       final key = context.readKey();
 
       if (key.isControl) {
-        final columns = _columns();
+        final columns = getColumns(maxOptionLength, component.options.length);
         switch (key.controlChar) {
           case ControlCharacter.arrowUp:
             setState(() {
@@ -185,13 +179,5 @@ class _GridSelectState extends State<GridSelect> {
     } else {
       selection.add(n);
     }
-  }
-
-  int _columns() {
-    final columnWidth = maxOptionLength + 6;
-    final columns = component.options.length < (stdout.terminalColumns ~/ columnWidth)
-        ? component.options.length
-        : stdout.terminalColumns ~/ columnWidth;
-    return columns;
   }
 }

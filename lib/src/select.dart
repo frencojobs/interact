@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:dart_console/dart_console.dart';
+import 'package:interact/src/utils/utils.dart';
 
 import 'framework/framework.dart';
 import 'theme/theme.dart';
@@ -42,6 +45,7 @@ class Select extends Component<int> {
 
 class _SelectState extends State<Select> {
   int index = 0;
+  late int maxOptionLength;
 
   @override
   void init() {
@@ -56,6 +60,8 @@ class _SelectState extends State<Select> {
     } else {
       index = component.initialIndex;
     }
+
+    maxOptionLength = component.options.map((e) => e.length).reduce(max);
 
     context.writeln(promptInput(
       theme: component.theme,
@@ -78,18 +84,26 @@ class _SelectState extends State<Select> {
 
   @override
   void render() {
-    for (var i = 0; i < component.options.length; i++) {
-      final option = component.options[i];
+    final columns = getColumns(maxOptionLength, component.options.length);
+    for (var i = 0; i < component.options.length; i += columns) {
       final line = StringBuffer();
+      for (var j = 0; j < columns; j++) {
+        final ij = i + j;
+        if (ij > component.options.length - 1) break;
 
-      if (i == index) {
-        line.write(component.theme.activeItemPrefix);
+        final option = component.options[ij];
+        final isActive = ij == index;
+        final prefix = isActive ? component.theme.activeItemPrefix : component.theme.inactiveItemPrefix;
+        final style = isActive ? component.theme.activeItemStyle(option) : component.theme.inactiveItemStyle(option);
+
+        line.write(prefix);
         line.write(' ');
-        line.write(component.theme.activeItemStyle(option));
-      } else {
-        line.write(component.theme.inactiveItemPrefix);
-        line.write(' ');
-        line.write(component.theme.inactiveItemStyle(option));
+        line.write(style);
+
+        final fill = maxOptionLength - option.length;
+        for (var i = fill; i >= 1; i--) {
+          line.write(' ');
+        }
       }
       context.writeln(line.toString());
     }
@@ -99,18 +113,29 @@ class _SelectState extends State<Select> {
   int interact() {
     while (true) {
       final key = context.readKey();
-
+      final columns = getColumns(maxOptionLength, component.options.length);
       switch (key.controlChar) {
         case ControlCharacter.arrowUp:
           setState(() {
-            index = (index - 1) % component.options.length;
+            index = (index - columns) % component.options.length;
           });
           break;
         case ControlCharacter.arrowDown:
           setState(() {
+            index = (index + columns) % component.options.length;
+          });
+          break;
+        case ControlCharacter.arrowLeft:
+          setState(() {
+            index = (index - 1) % component.options.length;
+          });
+          break;
+        case ControlCharacter.arrowRight:
+          setState(() {
             index = (index + 1) % component.options.length;
           });
           break;
+
         case ControlCharacter.enter:
           return index;
         default:
