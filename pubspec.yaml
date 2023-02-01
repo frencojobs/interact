@@ -1,25 +1,16 @@
 name: interact
 description: A collection of customizable interactive command-line components.
-version: 2.1.1
+version: 2.2.0
 repository: https://github.com/frencojobs/interact
 
 environment:
-  sdk: ">=2.12.0-0 <3.0.0"
+  sdk: ">=2.18.0 <3.0.0"
 
 dependencies:
-  dart_console: ^1.0.0
-  meta: ^1.3.0
+  dart_console: ^1.1.2
+  meta: ^1.8.0
   tint: ^2.0.0
 
 dev_dependencies:
-  import_sorter: ^4.4.2
-  lint: ^1.5.3
-  test: ^1.16.7
-
-scripts:
-  format:
-    - pub run import_sorter:main *
-    - dartfmt -w .
-
-import_sorter:
-  comments: false
+  lint: ^2.0.1
+  test: ^1.22.2

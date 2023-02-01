@@ -1,11 +1,10 @@
 import 'dart:async' show StreamSubscription;
 import 'dart:io' show ProcessSignal;
 
+import 'package:interact/src/framework/framework.dart';
+import 'package:interact/src/theme/theme.dart';
+import 'package:interact/src/utils/utils.dart';
 import 'package:tint/tint.dart';
-
-import 'framework/framework.dart';
-import 'theme/theme.dart';
-import 'utils/utils.dart';
 
 String _prompt(int x) => '';
 
@@ -127,11 +126,13 @@ class _ProgressState extends State<Progress> {
 
     line.write(leftPrompt);
     line.write(component.theme.progressPrefix);
-    line.write(_progress(
-      component.theme,
-      available,
-      (available / component.length * current).round(),
-    ));
+    line.write(
+      _progress(
+        component.theme,
+        available,
+        (available / component.length * current).round(),
+      ),
+    );
     line.write(component.theme.progressSuffix);
     line.write(rightPrompt);
 
@@ -177,15 +178,13 @@ class _ProgressState extends State<Progress> {
     int length,
     int filled,
   ) {
-    final f = theme
-        .filledProgressStyle(''.padRight(filled - 1, theme.filledProgress));
+    final f = theme.filledProgressStyle(''.padRight(filled - 1, theme.filledProgress));
     final l = filled == 0
         ? ''
         : filled == length
-        ? theme.filledProgressStyle(theme.filledProgress)
-        : theme.leadingProgressStyle(theme.leadingProgress);
-    final e = theme
-        .emptyProgressStyle(''.padRight(length - filled, theme.emptyProgress));
+            ? theme.filledProgressStyle(theme.filledProgress)
+            : theme.leadingProgressStyle(theme.leadingProgress);
+    final e = theme.emptyProgressStyle(''.padRight(length - filled, theme.emptyProgress));
 
     return '$f$l$e';
   }

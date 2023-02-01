@@ -159,8 +159,7 @@ class Context {
             buffer += key.char;
             index++;
           } else {
-            buffer =
-                buffer.substring(0, index) + key.char + buffer.substring(index);
+            buffer = buffer.substring(0, index) + key.char + buffer.substring(index);
             index++;
           }
         }
@@ -171,8 +170,7 @@ class Context {
         _console.cursorPosition = Coordinate(screenRow, screenColOffset);
         _console.eraseCursorToEnd();
         write(buffer);
-        _console.cursorPosition =
-            Coordinate(screenRow, screenColOffset + index);
+        _console.cursorPosition = Coordinate(screenRow, screenColOffset + index);
         _console.showCursor();
       }
     }

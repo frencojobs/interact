@@ -1,8 +1,7 @@
 import 'package:dart_console/dart_console.dart';
-
-import 'framework/framework.dart';
-import 'theme/theme.dart';
-import 'utils/prompt.dart';
+import 'package:interact/src/framework/framework.dart';
+import 'package:interact/src/theme/theme.dart';
+import 'package:interact/src/utils/prompt.dart';
 
 /// A selector component.
 class Select extends Component<int> {
@@ -57,20 +56,24 @@ class _SelectState extends State<Select> {
       index = component.initialIndex;
     }
 
-    context.writeln(promptInput(
-      theme: component.theme,
-      message: component.prompt,
-    ));
+    context.writeln(
+      promptInput(
+        theme: component.theme,
+        message: component.prompt,
+      ),
+    );
     context.hideCursor();
   }
 
   @override
   void dispose() {
-    context.writeln(promptSuccess(
-      theme: component.theme,
-      message: component.prompt,
-      value: component.options[index],
-    ));
+    context.writeln(
+      promptSuccess(
+        theme: component.theme,
+        message: component.prompt,
+        value: component.options[index],
+      ),
+    );
     context.showCursor();
 
     super.dispose();

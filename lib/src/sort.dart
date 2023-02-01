@@ -1,8 +1,7 @@
 import 'package:dart_console/dart_console.dart';
-
-import 'framework/framework.dart';
-import 'theme/theme.dart';
-import 'utils/prompt.dart';
+import 'package:interact/src/framework/framework.dart';
+import 'package:interact/src/theme/theme.dart';
+import 'package:interact/src/utils/prompt.dart';
 
 /// A sortable list component.
 class Sort extends Component<List<String>> {
@@ -52,25 +51,26 @@ class _SortState extends State<Sort> {
       throw Exception("Options can't be empty");
     }
     index = 0;
-    options =
-        component.options.asMap().entries.map((entry) => entry.key).toList();
+    options = component.options.asMap().entries.map((entry) => entry.key).toList();
 
-    context.writeln(promptInput(
-      theme: component.theme,
-      message: component.prompt,
-    ));
+    context.writeln(
+      promptInput(
+        theme: component.theme,
+        message: component.prompt,
+      ),
+    );
     context.hideCursor();
   }
 
   @override
   void dispose() {
-    context.writeln(promptSuccess(
-      theme: component.theme,
-      message: component.prompt,
-      value: component.showOutput
-          ? options.map((i) => component.options[i]).join(', ')
-          : '',
-    ));
+    context.writeln(
+      promptSuccess(
+        theme: component.theme,
+        message: component.prompt,
+        value: component.showOutput ? options.map((i) => component.options[i]).join(', ') : '',
+      ),
+    );
     context.showCursor();
 
     super.dispose();

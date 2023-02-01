@@ -1,8 +1,7 @@
 import 'package:dart_console/dart_console.dart';
-
-import 'framework/framework.dart';
-import 'theme/theme.dart';
-import 'utils/prompt.dart';
+import 'package:interact/src/framework/framework.dart';
+import 'package:interact/src/theme/theme.dart';
+import 'package:interact/src/utils/prompt.dart';
 
 /// A multiple select or checkbox input component.
 class MultiSelect extends Component<List<int>> {
@@ -61,34 +60,31 @@ class _MultiSelectState extends State<MultiSelect> {
         );
       } else {
         selection.addAll(
-          component.defaults!
-              .asMap()
-              .entries
-              .where((entry) => entry.value)
-              .map((entry) => entry.key),
+          component.defaults!.asMap().entries.where((entry) => entry.value).map((entry) => entry.key),
         );
       }
     }
 
-    context.writeln(promptInput(
-      theme: component.theme,
-      message: component.prompt,
-    ));
+    context.writeln(
+      promptInput(
+        theme: component.theme,
+        message: component.prompt,
+      ),
+    );
     context.hideCursor();
   }
 
   @override
   void dispose() {
-    final values = selection
-        .map((x) => component.options[x])
-        .map(component.theme.valueStyle)
-        .join(', ');
+    final values = selection.map((x) => component.options[x]).map(component.theme.valueStyle).join(', ');
 
-    context.writeln(promptSuccess(
-      theme: component.theme,
-      message: component.prompt,
-      value: values,
-    ));
+    context.writeln(
+      promptSuccess(
+        theme: component.theme,
+        message: component.prompt,
+        value: values,
+      ),
+    );
 
     context.showCursor();
     super.dispose();

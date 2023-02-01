@@ -1,5 +1,5 @@
-import 'package:tint/tint.dart';
 import 'package:interact/interact.dart' show MultiProgress, Progress, Theme;
+import 'package:tint/tint.dart';
 
 Future<void> main() async {
   final bars = MultiProgress();
@@ -14,32 +14,35 @@ Future<void> main() async {
     leadingProgressStyle: (x) => x.cyan(),
   );
 
-  final p1 = bars.add(Progress.withTheme(
-    size: 0.5,
-    theme: theme,
-    length: length,
-    leftPrompt: (current) =>
-        '${(current / length).toStringAsPrecision(2).padLeft(4)} % ',
-    rightPrompt: (current) => ' ${current.toString().padLeft(4)}/$length',
-  ));
+  final p1 = bars.add(
+    Progress.withTheme(
+      size: 0.5,
+      theme: theme,
+      length: length,
+      leftPrompt: (current) => '${(current / length).toStringAsPrecision(2).padLeft(4)} % ',
+      rightPrompt: (current) => ' ${current.toString().padLeft(4)}/$length',
+    ),
+  );
 
-  final p2 = bars.add(Progress.withTheme(
-    size: 0.5,
-    theme: theme,
-    length: length,
-    leftPrompt: (current) =>
-        '${(current / length).toStringAsPrecision(2).padLeft(4)} % ',
-    rightPrompt: (current) => ' ${current.toString().padLeft(4)}/$length',
-  ));
+  final p2 = bars.add(
+    Progress.withTheme(
+      size: 0.5,
+      theme: theme,
+      length: length,
+      leftPrompt: (current) => '${(current / length).toStringAsPrecision(2).padLeft(4)} % ',
+      rightPrompt: (current) => ' ${current.toString().padLeft(4)}/$length',
+    ),
+  );
 
-  final p3 = bars.add(Progress.withTheme(
-    size: 0.5,
-    theme: theme,
-    length: length,
-    leftPrompt: (current) =>
-        '${(current / length).toStringAsPrecision(2).padLeft(4)} % ',
-    rightPrompt: (current) => ' ${current.toString().padLeft(4)}/$length',
-  ));
+  final p3 = bars.add(
+    Progress.withTheme(
+      size: 0.5,
+      theme: theme,
+      length: length,
+      leftPrompt: (current) => '${(current / length).toStringAsPrecision(2).padLeft(4)} % ',
+      rightPrompt: (current) => ' ${current.toString().padLeft(4)}/$length',
+    ),
+  );
 
   await Future.delayed(const Duration(seconds: 1));
 
