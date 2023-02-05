@@ -1,6 +1,6 @@
-import 'framework/framework.dart';
-import 'theme/theme.dart';
-import 'utils/prompt.dart';
+import 'package:interact/src/framework/framework.dart';
+import 'package:interact/src/theme/theme.dart';
+import 'package:interact/src/utils/prompt.dart';
 
 /// The error message to be thrown from the [Input] component's
 /// validator when there is an error.
@@ -67,11 +67,13 @@ class _InputState extends State<Input> {
   @override
   void dispose() {
     if (value != null) {
-      context.writeln(promptSuccess(
-        theme: component.theme,
-        message: component.prompt,
-        value: value!,
-      ));
+      context.writeln(
+        promptSuccess(
+          theme: component.theme,
+          message: component.prompt,
+          value: value!,
+        ),
+      );
     }
     super.dispose();
   }
@@ -79,21 +81,25 @@ class _InputState extends State<Input> {
   @override
   void render() {
     if (error != null) {
-      context.writeln(promptError(
-        theme: component.theme,
-        message: error!,
-      ));
+      context.writeln(
+        promptError(
+          theme: component.theme,
+          message: error!,
+        ),
+      );
     }
   }
 
   @override
   String interact() {
     while (true) {
-      context.write(promptInput(
-        theme: component.theme,
-        message: component.prompt,
-        hint: component.defaultValue,
-      ));
+      context.write(
+        promptInput(
+          theme: component.theme,
+          message: component.prompt,
+          hint: component.defaultValue,
+        ),
+      );
       final input = context.readLine(initialText: component.initialText);
       final line = input.isEmpty && component.defaultValue != null
           ? component.defaultValue!

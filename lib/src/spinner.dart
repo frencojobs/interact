@@ -1,9 +1,9 @@
 import 'dart:async' show Timer, StreamSubscription;
 import 'dart:io' show ProcessSignal;
 
-import 'framework/framework.dart';
-import 'theme/theme.dart';
-import 'utils/utils.dart';
+import 'package:interact/src/framework/framework.dart';
+import 'package:interact/src/theme/theme.dart';
+import 'package:interact/src/utils/utils.dart';
 
 String _prompt(bool x) => '';
 

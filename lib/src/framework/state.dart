@@ -19,6 +19,7 @@ abstract class State<T extends Component> {
   /// Changes the context to a new one, not to be used in normal components
   /// except [MultiSpinner] and [MultiProgress] components which requires
   /// custom context overriding.
+  // ignore: use_setters_to_change_properties
   void setContext<U extends Context>(U c) => _context = c;
 
   T? _component;

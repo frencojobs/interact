@@ -1,3 +1,8 @@
+## 2.2.0
+
+- Update sdk and dependencies to the most recent ones
+- Prevent cursor jumping from being seen on some terminals
+
 ## 2.1.1
 
 - Call `reset` on Ctrl+C forced exits

@@ -1,6 +1,7 @@
 import 'dart:async' show StreamSubscription;
 import 'dart:io' show ProcessSignal, exit;
-import '../framework/framework.dart' show Context;
+
+import 'package:interact/src/framework/framework.dart' show Context;
 
 /// Catch sigint and reset to terminal defaults before exit.
 StreamSubscription<ProcessSignal> handleSigint() {

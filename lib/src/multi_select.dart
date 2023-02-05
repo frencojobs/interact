@@ -1,8 +1,7 @@
 import 'package:dart_console/dart_console.dart';
-
-import 'framework/framework.dart';
-import 'theme/theme.dart';
-import 'utils/prompt.dart';
+import 'package:interact/src/framework/framework.dart';
+import 'package:interact/src/theme/theme.dart';
+import 'package:interact/src/utils/prompt.dart';
 
 /// A multiple select or checkbox input component.
 class MultiSelect extends Component<List<int>> {
@@ -70,10 +69,12 @@ class _MultiSelectState extends State<MultiSelect> {
       }
     }
 
-    context.writeln(promptInput(
-      theme: component.theme,
-      message: component.prompt,
-    ));
+    context.writeln(
+      promptInput(
+        theme: component.theme,
+        message: component.prompt,
+      ),
+    );
     context.hideCursor();
   }
 
@@ -84,11 +85,13 @@ class _MultiSelectState extends State<MultiSelect> {
         .map(component.theme.valueStyle)
         .join(', ');
 
-    context.writeln(promptSuccess(
-      theme: component.theme,
-      message: component.prompt,
-      value: values,
-    ));
+    context.writeln(
+      promptSuccess(
+        theme: component.theme,
+        message: component.prompt,
+        value: values,
+      ),
+    );
 
     context.showCursor();
     super.dispose();

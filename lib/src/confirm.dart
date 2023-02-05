@@ -1,8 +1,7 @@
 import 'package:dart_console/dart_console.dart';
-
-import 'framework/framework.dart';
-import 'theme/theme.dart';
-import 'utils/prompt.dart';
+import 'package:interact/src/framework/framework.dart';
+import 'package:interact/src/theme/theme.dart';
+import 'package:interact/src/utils/prompt.dart';
 
 /// A confirm component.
 class Confirm extends Component<bool> {
@@ -52,11 +51,13 @@ class _ConfirmState extends State<Confirm> {
 
   @override
   void dispose() {
-    context.writeln(promptSuccess(
-      theme: component.theme,
-      message: component.prompt,
-      value: answer! ? 'yes' : 'no',
-    ));
+    context.writeln(
+      promptSuccess(
+        theme: component.theme,
+        message: component.prompt,
+        value: answer! ? 'yes' : 'no',
+      ),
+    );
     context.showCursor();
 
     super.dispose();
@@ -65,11 +66,13 @@ class _ConfirmState extends State<Confirm> {
   @override
   void render() {
     final line = StringBuffer();
-    line.write(promptInput(
-      theme: component.theme,
-      message: component.prompt,
-      hint: 'y/n',
-    ));
+    line.write(
+      promptInput(
+        theme: component.theme,
+        message: component.prompt,
+        hint: 'y/n',
+      ),
+    );
     if (answer != null) {
       line.write(component.theme.defaultStyle(answer! ? 'yes' : 'no'));
     }

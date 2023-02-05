@@ -1,5 +1,5 @@
-import 'framework/framework.dart';
-import 'spinner.dart';
+import 'package:interact/src/framework/framework.dart';
+import 'package:interact/src/spinner.dart';
 
 /// A shared context and handler for rendering multiple [Spinner]s.
 class MultiSpinner {
@@ -36,19 +36,23 @@ class MultiSpinner {
     final index = _spinners.length;
 
     _lines.add(StringBuffer());
-    spinner.setContext(BufferContext(
-      buffer: _lines[index],
-      setState: _render,
-    ));
+    spinner.setContext(
+      BufferContext(
+        buffer: _lines[index],
+        setState: _render,
+      ),
+    );
     _spinners.add(spinner.interact());
 
-    final state = SpinnerState(done: () {
-      final disposer = _spinners[index].done();
-      _dispose(() {
-        _disposers.add(disposer);
-      });
-      return disposer;
-    });
+    final state = SpinnerState(
+      done: () {
+        final disposer = _spinners[index].done();
+        _dispose(() {
+          _disposers.add(disposer);
+        });
+        return disposer;
+      },
+    );
 
     return state;
   }

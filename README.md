@@ -288,9 +288,3 @@ try {
 ## Acknowledgement
 
 This library is mostly inspired by [dialouger](https://github.com/mitsuhiko/dialoguer) library from Rust. The lack of a properly maintained library for Dart with a well-made API is what pushed me into making this library.
-
-<br>
-
-## License
-
-MIT © Frenco Jobs

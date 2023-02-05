@@ -1,4 +1,5 @@
 import 'dart:io' show stdout;
+
 import 'package:interact/interact.dart' show Input, ValidationError;
 
 void main() {
