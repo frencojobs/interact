@@ -101,7 +101,9 @@ class _InputState extends State<Input> {
         ),
       );
       final input = context.readLine(initialText: component.initialText);
-      final line = input.isEmpty && component.defaultValue != null ? component.defaultValue! : input;
+      final line = input.isEmpty && component.defaultValue != null
+          ? component.defaultValue!
+          : input;
 
       if (component.validator != null) {
         try {

@@ -60,7 +60,11 @@ class _MultiSelectState extends State<MultiSelect> {
         );
       } else {
         selection.addAll(
-          component.defaults!.asMap().entries.where((entry) => entry.value).map((entry) => entry.key),
+          component.defaults!
+              .asMap()
+              .entries
+              .where((entry) => entry.value)
+              .map((entry) => entry.key),
         );
       }
     }
@@ -76,7 +80,10 @@ class _MultiSelectState extends State<MultiSelect> {
 
   @override
   void dispose() {
-    final values = selection.map((x) => component.options[x]).map(component.theme.valueStyle).join(', ');
+    final values = selection
+        .map((x) => component.options[x])
+        .map(component.theme.valueStyle)
+        .join(', ');
 
     context.writeln(
       promptSuccess(

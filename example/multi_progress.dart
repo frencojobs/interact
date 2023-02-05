@@ -19,7 +19,8 @@ Future<void> main() async {
       size: 0.5,
       theme: theme,
       length: length,
-      leftPrompt: (current) => '${(current / length).toStringAsPrecision(2).padLeft(4)} % ',
+      leftPrompt: (current) =>
+          '${(current / length).toStringAsPrecision(2).padLeft(4)} % ',
       rightPrompt: (current) => ' ${current.toString().padLeft(4)}/$length',
     ),
   );
@@ -29,7 +30,8 @@ Future<void> main() async {
       size: 0.5,
       theme: theme,
       length: length,
-      leftPrompt: (current) => '${(current / length).toStringAsPrecision(2).padLeft(4)} % ',
+      leftPrompt: (current) =>
+          '${(current / length).toStringAsPrecision(2).padLeft(4)} % ',
       rightPrompt: (current) => ' ${current.toString().padLeft(4)}/$length',
     ),
   );
@@ -39,7 +41,8 @@ Future<void> main() async {
       size: 0.5,
       theme: theme,
       length: length,
-      leftPrompt: (current) => '${(current / length).toStringAsPrecision(2).padLeft(4)} % ',
+      leftPrompt: (current) =>
+          '${(current / length).toStringAsPrecision(2).padLeft(4)} % ',
       rightPrompt: (current) => ' ${current.toString().padLeft(4)}/$length',
     ),
   );

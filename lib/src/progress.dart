@@ -178,13 +178,15 @@ class _ProgressState extends State<Progress> {
     int length,
     int filled,
   ) {
-    final f = theme.filledProgressStyle(''.padRight(filled - 1, theme.filledProgress));
+    final f = theme
+        .filledProgressStyle(''.padRight(filled - 1, theme.filledProgress));
     final l = filled == 0
         ? ''
         : filled == length
             ? theme.filledProgressStyle(theme.filledProgress)
             : theme.leadingProgressStyle(theme.leadingProgress);
-    final e = theme.emptyProgressStyle(''.padRight(length - filled, theme.emptyProgress));
+    final e = theme
+        .emptyProgressStyle(''.padRight(length - filled, theme.emptyProgress));
 
     return '$f$l$e';
   }

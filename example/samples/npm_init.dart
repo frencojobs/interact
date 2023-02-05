@@ -80,7 +80,9 @@ void main() {
       'url': repo,
     },
     'scripts': <String, String>{
-      'test': testCommand.isNotEmpty ? testCommand : 'echo "Error: no test specified" && exit 1'
+      'test': testCommand.isNotEmpty
+          ? testCommand
+          : 'echo "Error: no test specified" && exit 1'
     },
     'keywords': keywords.isEmpty ? [] : keywords.split(' '),
     'license': license,
