@@ -57,6 +57,7 @@ class Spinner extends Component<SpinnerState> {
 
   /// Sets the context to a new one,
   /// to be used internally by [MultiSpinner].
+  // ignore: use_setters_to_change_properties
   void setContext(Context c) => _context = c;
 }
 

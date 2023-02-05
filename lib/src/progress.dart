@@ -65,6 +65,7 @@ class Progress extends Component<ProgressState> {
 
   /// Sets the context to a new one,
   /// to be used internally by [MultiProgress].
+  // ignore: use_setters_to_change_properties
   void setContext(Context c) => _context = c;
 }
 
