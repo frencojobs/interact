@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dart_console/dart_console.dart';
 import 'package:interact/src/framework/framework.dart';
 import 'package:interact/src/theme/theme.dart';
@@ -40,6 +42,7 @@ class MultiSelect extends Component<List<int>> {
 class _MultiSelectState extends State<MultiSelect> {
   late List<int> selection;
   late int index;
+  int offset = 0;
 
   @override
   void init() {
@@ -97,8 +100,18 @@ class _MultiSelectState extends State<MultiSelect> {
     super.dispose();
   }
 
+  int maxLength() {
+    final lines = stdout.terminalLines - 3;
+    return lines > component.options.length ? component.options.length : lines;
+  }
+
   @override
   void render() {
+    if (index >= offset + maxLength()) {
+      offset = index - maxLength() + 1;
+    } else if (index < offset) {
+      offset = index;
+    }
     for (var i = 0; i < component.options.length; i++) {
       final option = component.options[i];
       final line = StringBuffer();
