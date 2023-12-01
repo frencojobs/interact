@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dart_console/dart_console.dart';
 import 'package:interact/src/framework/framework.dart';
 import 'package:interact/src/theme/theme.dart';
@@ -41,6 +43,7 @@ class Select extends Component<int> {
 
 class _SelectState extends State<Select> {
   int index = 0;
+  int offset = 0;
 
   @override
   void init() {
@@ -79,9 +82,19 @@ class _SelectState extends State<Select> {
     super.dispose();
   }
 
+  int maxLength() {
+    final lines = stdout.terminalLines - 3;
+    return lines > component.options.length ? component.options.length : lines;
+  }
+
   @override
   void render() {
-    for (var i = 0; i < component.options.length; i++) {
+    if (index >= offset + maxLength()) {
+      offset = index - maxLength() + 1;
+    } else if (index < offset) {
+      offset = index;
+    }
+    for (var i = offset; i < offset + maxLength(); i++) {
       final option = component.options[i];
       final line = StringBuffer();
 
