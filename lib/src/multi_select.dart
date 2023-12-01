@@ -107,12 +107,13 @@ class _MultiSelectState extends State<MultiSelect> {
 
   @override
   void render() {
-    if (index >= offset + maxLength()) {
-      offset = index - maxLength() + 1;
+    final length = maxLength();
+    if (index >= offset + length) {
+      offset = index - length + 1;
     } else if (index < offset) {
       offset = index;
     }
-    for (var i = 0; i < component.options.length; i++) {
+    for (var i = offset; i < offset + length; i++) {
       final option = component.options[i];
       final line = StringBuffer();
 
