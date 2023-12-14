@@ -52,6 +52,13 @@ class MultiSpinner {
         });
         return disposer;
       },
+      failed: () {
+        final disposer = _spinners[index].failed();
+        _dispose(() {
+          _disposers.add(disposer);
+        });
+        return disposer;
+      },
     );
 
     return state;
