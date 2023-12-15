@@ -6,15 +6,10 @@ Future<void> main() async {
   final gift = Spinner.withTheme(
     theme: theme,
     icon: '🏆',
-    rightPrompt: (state) {
-      switch (state) {
-        case SpinnerStateType.inProgress:
-          return 'Processing...';
-        case SpinnerStateType.done:
-          return 'Done!';
-        case SpinnerStateType.failed:
-          return 'Failed!';
-      }
+    rightPrompt: (state) => switch (state) {
+      SpinnerStateType.inProgress => 'Processing...',
+      SpinnerStateType.done => 'Done!',
+      SpinnerStateType.failed => 'Failed!',
     },
   ).interact();
 
