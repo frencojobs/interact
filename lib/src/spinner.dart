@@ -1,4 +1,4 @@
-import 'dart:async' show Timer, StreamSubscription;
+import 'dart:async' show StreamSubscription, Timer;
 import 'dart:io' show ProcessSignal;
 
 import 'package:interact/src/framework/framework.dart';

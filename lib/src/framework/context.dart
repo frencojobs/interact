@@ -1,4 +1,4 @@
-part of interact.framework;
+part of 'framework.dart';
 
 final _defaultConsole = Console();
 
@@ -113,43 +113,35 @@ class Context {
               buffer = buffer.substring(0, index - 1) + buffer.substring(index);
               index--;
             }
-            break;
           case ControlCharacter.delete:
           case ControlCharacter.ctrlD:
             if (index < buffer.length - 1) {
               buffer = buffer.substring(0, index) + buffer.substring(index + 1);
             }
-            break;
+
           case ControlCharacter.ctrlU:
             buffer = '';
             index = 0;
-            break;
           case ControlCharacter.ctrlK:
             buffer = buffer.substring(0, index);
-            break;
           case ControlCharacter.arrowLeft:
           case ControlCharacter.ctrlB:
             index = index > 0 ? index - 1 : index;
-            break;
           case ControlCharacter.arrowRight:
           case ControlCharacter.ctrlF:
             index = index < buffer.length ? index + 1 : index;
-            break;
           case ControlCharacter.wordLeft:
             if (index > 0) {
               final bufferLeftOfCursor = buffer.substring(0, index - 1);
               final lastSpace = bufferLeftOfCursor.lastIndexOf(' ');
               index = lastSpace != -1 ? lastSpace + 1 : 0;
             }
-            break;
           case ControlCharacter.home:
           case ControlCharacter.ctrlA:
             index = 0;
-            break;
           case ControlCharacter.end:
           case ControlCharacter.ctrlE:
             index = buffer.length;
-            break;
           default:
             break;
         }
