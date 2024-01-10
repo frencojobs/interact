@@ -1,4 +1,4 @@
-import 'package:interact/interact.dart' show Spinner, Theme;
+import 'package:interact/interact.dart' show Spinner, SpinnerStateType, Theme;
 
 Future<void> main() async {
   final theme = Theme.basicTheme;
@@ -6,9 +6,11 @@ Future<void> main() async {
   final gift = Spinner.withTheme(
     theme: theme,
     icon: '🏆',
-    rightPrompt: (done) => done
-        ? 'here is a trophy for being patient'
-        : 'searching a thing for you',
+    rightPrompt: (state) => switch (state) {
+      SpinnerStateType.inProgress => 'Processing...',
+      SpinnerStateType.done => 'Done!',
+      SpinnerStateType.failed => 'Failed!',
+    },
   ).interact();
 
   await Future.delayed(const Duration(seconds: 5));

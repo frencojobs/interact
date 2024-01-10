@@ -1,4 +1,4 @@
-part of interact.framework;
+part of 'framework.dart';
 
 /// Provides the structure and `setState` function.
 abstract class State<T extends Component> {

@@ -100,7 +100,6 @@ class _ConfirmState extends State<Confirm> {
             if (!component.waitForNewLine) {
               return answer!;
             }
-            break;
           case 'n':
           case 'N':
             setState(() {
@@ -109,7 +108,6 @@ class _ConfirmState extends State<Confirm> {
             if (!component.waitForNewLine) {
               return answer!;
             }
-            break;
           default:
             break;
         }

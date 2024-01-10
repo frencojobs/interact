@@ -125,7 +125,6 @@ class _SortState extends State<Sort> {
                 _up();
               }
             });
-            break;
           case ControlCharacter.arrowDown:
             setState(() {
               index = (index + 1) % component.options.length;
@@ -133,7 +132,6 @@ class _SortState extends State<Sort> {
                 _down();
               }
             });
-            break;
           case ControlCharacter.enter:
             return options.map((x) => component.options[x]).toList();
           default:

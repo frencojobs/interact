@@ -1,4 +1,4 @@
-part of interact.framework;
+part of 'framework.dart';
 
 /// A [Component] is an abstraction made with purpose
 /// of writing clear/managed state and rendering for

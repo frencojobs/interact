@@ -108,12 +108,10 @@ class _SelectState extends State<Select> {
           setState(() {
             index = (index - 1) % component.options.length;
           });
-          break;
         case ControlCharacter.arrowDown:
           setState(() {
             index = (index + 1) % component.options.length;
           });
-          break;
         case ControlCharacter.enter:
           return index;
         default:

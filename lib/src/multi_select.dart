@@ -140,12 +140,10 @@ class _MultiSelectState extends State<MultiSelect> {
             setState(() {
               index = (index - 1) % component.options.length;
             });
-            break;
           case ControlCharacter.arrowDown:
             setState(() {
               index = (index + 1) % component.options.length;
             });
-            break;
           case ControlCharacter.enter:
             return selection;
           default:

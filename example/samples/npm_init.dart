@@ -1,5 +1,5 @@
 import 'dart:convert' show JsonEncoder;
-import 'dart:io' show stdout, stderr, exit;
+import 'dart:io' show exit, stderr, stdout;
 
 import 'package:interact/interact.dart';
 
@@ -82,7 +82,7 @@ void main() {
     'scripts': <String, String>{
       'test': testCommand.isNotEmpty
           ? testCommand
-          : 'echo "Error: no test specified" && exit 1'
+          : 'echo "Error: no test specified" && exit 1',
     },
     'keywords': keywords.isEmpty ? [] : keywords.split(' '),
     'license': license,

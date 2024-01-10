@@ -1,5 +1,3 @@
-library interact;
-
 import 'package:interact/src/framework/framework.dart' show Context;
 
 export 'src/confirm.dart';
